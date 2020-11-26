@@ -1,0 +1,4632 @@
+ACOS-SYSTEM-STATS-MIB DEFINITIONS ::= BEGIN
+	IMPORTS
+		DisplayString, PhysAddress
+		FROM SNMPv2-TC
+	InetAddressType
+		FROM INET-ADDRESS-MIB
+	acosRootStats
+		FROM A10-AX-MIB
+	MODULE-IDENTITY, OBJECT-TYPE, Counter32, Integer32, Counter64, OBJECT-IDENTITY, NOTIFICATION-TYPE
+		FROM SNMPv2-SMI;
+		acosSystem MODULE-IDENTITY
+				LAST-UPDATED	"200705071327Z"
+				ORGANIZATION	"A10 Networks, Inc."
+				CONTACT-INFO	"Address: A10 Networks, Inc.
+							  3 West Pumeria Dr.
+							  San Jose, CA 95131
+						 Phone:   +1-888-822-7210 (USA/Canada)
+						          +1-408-325-8676 (International)
+						 E-mail:  support@A10Networks.com"
+
+				DESCRIPTION	 "System OID for ACOS"
+				::=  {  acosRootStats 39  }
+
+acosSystem                          OBJECT IDENTIFIER ::= { acosRootStats 39 }
+acosSystemBandwidth                 OBJECT IDENTIFIER ::= { acosSystem 4 }
+acosSystemBandwidthS                OBJECT IDENTIFIER ::= { acosSystemBandwidth 1 }
+
+		inputBytesPerSec OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Bytes per second" 
+		::={ acosSystemBandwidthS 1 } 
+
+		outputBytesPerSec OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Bytes per second" 
+		::={ acosSystemBandwidthS 2 } 
+
+acosSystemCounterLibAccounting      OBJECT IDENTIFIER ::= { acosSystem 99 }
+acosSystemCounterLibAccountingS     OBJECT IDENTIFIER ::= { acosSystemCounterLibAccounting 1 }
+
+		totalCtrAlloc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total counters allocated" 
+		::={ acosSystemCounterLibAccountingS 1 } 
+
+		totalCtrInRml OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total counters put in rml queue" 
+		::={ acosSystemCounterLibAccountingS 2 } 
+
+		totalCtrFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total counters actually freed" 
+		::={ acosSystemCounterLibAccountingS 3 } 
+
+		totalCtrInSystem OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total counters currently allocated in system" 
+		::={ acosSystemCounterLibAccountingS 4 } 
+
+		totalOperAlloc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total oper blocks allocated" 
+		::={ acosSystemCounterLibAccountingS 5 } 
+
+		totalOperFree OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total oper blocks freed" 
+		::={ acosSystemCounterLibAccountingS 6 } 
+
+		totalBlocksInHash OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total blocks in hash table" 
+		::={ acosSystemCounterLibAccountingS 7 } 
+
+		totalBlocksInRmlHash OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total blocks in rml in hash table" 
+		::={ acosSystemCounterLibAccountingS 8 } 
+
+		totalNodesAlloc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total nodes allocated(sflow/history/telemetry/cpu-compute)" 
+		::={ acosSystemCounterLibAccountingS 9 } 
+
+		totalNodesInRml OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total nodes put in rml queue" 
+		::={ acosSystemCounterLibAccountingS 10 } 
+
+		totalNodesFree OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total nodes freed(sflow/history/telemetry/cpu-compute)" 
+		::={ acosSystemCounterLibAccountingS 11 } 
+
+		totalNodesFreeFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total nodes free failed" 
+		::={ acosSystemCounterLibAccountingS 12 } 
+
+		totalNodesUnlinkFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total nodes unlink failed" 
+		::={ acosSystemCounterLibAccountingS 13 } 
+
+		totalNodesInSystem OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total nodes currently allocated in system" 
+		::={ acosSystemCounterLibAccountingS 14 } 
+
+		totalMemblocksAllocAvro OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total memory blocks allocated by avro lib" 
+		::={ acosSystemCounterLibAccountingS 15 } 
+
+		totalMemblocksFreeAvro OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total memory blocks freed by avro lib" 
+		::={ acosSystemCounterLibAccountingS 16 } 
+
+		totalMemblocksReallocAvro OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total memory blocks realloc by avro lib" 
+		::={ acosSystemCounterLibAccountingS 17 } 
+
+acosSystemControlCpu                OBJECT IDENTIFIER ::= { acosSystem 5 }
+acosSystemControlCpuS               OBJECT IDENTIFIER ::= { acosSystemControlCpu 1 }
+
+		ctrlCpuNumber OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Number of ctrl cpus" 
+		::={ acosSystemControlCpuS 1 } 
+
+		cpu1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-1" 
+		::={ acosSystemControlCpuS 2 } 
+
+		cpu2 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-2" 
+		::={ acosSystemControlCpuS 3 } 
+
+		cpu3 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-3" 
+		::={ acosSystemControlCpuS 4 } 
+
+		cpu4 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-4" 
+		::={ acosSystemControlCpuS 5 } 
+
+		cpu5 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-5" 
+		::={ acosSystemControlCpuS 6 } 
+
+		cpu6 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-6" 
+		::={ acosSystemControlCpuS 7 } 
+
+		cpu7 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-7" 
+		::={ acosSystemControlCpuS 8 } 
+
+		cpu8 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-8" 
+		::={ acosSystemControlCpuS 9 } 
+
+		cpu9 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-9" 
+		::={ acosSystemControlCpuS 10 } 
+
+		cpu10 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-10" 
+		::={ acosSystemControlCpuS 11 } 
+
+		cpu11 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-11" 
+		::={ acosSystemControlCpuS 12 } 
+
+		cpu12 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-12" 
+		::={ acosSystemControlCpuS 13 } 
+
+		cpu13 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-13" 
+		::={ acosSystemControlCpuS 14 } 
+
+		cpu14 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-14" 
+		::={ acosSystemControlCpuS 15 } 
+
+		cpu15 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-15" 
+		::={ acosSystemControlCpuS 16 } 
+
+		cpu16 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-16" 
+		::={ acosSystemControlCpuS 17 } 
+
+		cpu17 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-17" 
+		::={ acosSystemControlCpuS 18 } 
+
+		cpu18 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-18" 
+		::={ acosSystemControlCpuS 19 } 
+
+		cpu19 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-19" 
+		::={ acosSystemControlCpuS 20 } 
+
+		cpu20 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-20" 
+		::={ acosSystemControlCpuS 21 } 
+
+		cpu21 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-21" 
+		::={ acosSystemControlCpuS 22 } 
+
+		cpu22 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-22" 
+		::={ acosSystemControlCpuS 23 } 
+
+		cpu23 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-23" 
+		::={ acosSystemControlCpuS 24 } 
+
+		cpu24 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-24" 
+		::={ acosSystemControlCpuS 25 } 
+
+		cpu25 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-25" 
+		::={ acosSystemControlCpuS 26 } 
+
+		cpu26 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-26" 
+		::={ acosSystemControlCpuS 27 } 
+
+		cpu27 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-27" 
+		::={ acosSystemControlCpuS 28 } 
+
+		cpu28 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-28" 
+		::={ acosSystemControlCpuS 29 } 
+
+		cpu29 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-29" 
+		::={ acosSystemControlCpuS 30 } 
+
+		cpu30 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-30" 
+		::={ acosSystemControlCpuS 31 } 
+
+		cpu31 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-31" 
+		::={ acosSystemControlCpuS 32 } 
+
+		cpu32 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-32" 
+		::={ acosSystemControlCpuS 33 } 
+
+		cpu33 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-33" 
+		::={ acosSystemControlCpuS 34 } 
+
+		cpu34 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-34" 
+		::={ acosSystemControlCpuS 35 } 
+
+		cpu35 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-35" 
+		::={ acosSystemControlCpuS 36 } 
+
+		cpu36 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-36" 
+		::={ acosSystemControlCpuS 37 } 
+
+		cpu37 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-37" 
+		::={ acosSystemControlCpuS 38 } 
+
+		cpu38 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-38" 
+		::={ acosSystemControlCpuS 39 } 
+
+		cpu39 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-39" 
+		::={ acosSystemControlCpuS 40 } 
+
+		cpu40 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-40" 
+		::={ acosSystemControlCpuS 41 } 
+
+		cpu41 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-41" 
+		::={ acosSystemControlCpuS 42 } 
+
+		cpu42 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-42" 
+		::={ acosSystemControlCpuS 43 } 
+
+		cpu43 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-43" 
+		::={ acosSystemControlCpuS 44 } 
+
+		cpu44 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-44" 
+		::={ acosSystemControlCpuS 45 } 
+
+		cpu45 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-45" 
+		::={ acosSystemControlCpuS 46 } 
+
+		cpu46 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-46" 
+		::={ acosSystemControlCpuS 47 } 
+
+		cpu47 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-47" 
+		::={ acosSystemControlCpuS 48 } 
+
+		cpu48 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-48" 
+		::={ acosSystemControlCpuS 49 } 
+
+		cpu49 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-49" 
+		::={ acosSystemControlCpuS 50 } 
+
+		cpu50 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-50" 
+		::={ acosSystemControlCpuS 51 } 
+
+		cpu51 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-51" 
+		::={ acosSystemControlCpuS 52 } 
+
+		cpu52 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-52" 
+		::={ acosSystemControlCpuS 53 } 
+
+		cpu53 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-53" 
+		::={ acosSystemControlCpuS 54 } 
+
+		cpu54 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-54" 
+		::={ acosSystemControlCpuS 55 } 
+
+		cpu55 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-55" 
+		::={ acosSystemControlCpuS 56 } 
+
+		cpu56 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-56" 
+		::={ acosSystemControlCpuS 57 } 
+
+		cpu57 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-57" 
+		::={ acosSystemControlCpuS 58 } 
+
+		cpu58 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-58" 
+		::={ acosSystemControlCpuS 59 } 
+
+		cpu59 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-59" 
+		::={ acosSystemControlCpuS 60 } 
+
+		cpu60 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-60" 
+		::={ acosSystemControlCpuS 61 } 
+
+		cpu61 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-61" 
+		::={ acosSystemControlCpuS 62 } 
+
+		cpu62 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-62" 
+		::={ acosSystemControlCpuS 63 } 
+
+		cpu63 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-63" 
+		::={ acosSystemControlCpuS 64 } 
+
+		cpu64 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control CPU-64" 
+		::={ acosSystemControlCpuS 65 } 
+
+acosSystemDataCpu                   OBJECT IDENTIFIER ::= { acosSystem 6 }
+acosSystemDataCpuS                  OBJECT IDENTIFIER ::= { acosSystemDataCpu 1 }
+
+		dataCpuNumber OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Number of data cpus" 
+		::={ acosSystemDataCpuS 1 } 
+
+		cpu1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-1" 
+		::={ acosSystemDataCpuS 2 } 
+
+		cpu2 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-2" 
+		::={ acosSystemDataCpuS 3 } 
+
+		cpu3 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-3" 
+		::={ acosSystemDataCpuS 4 } 
+
+		cpu4 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-4" 
+		::={ acosSystemDataCpuS 5 } 
+
+		cpu5 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-5" 
+		::={ acosSystemDataCpuS 6 } 
+
+		cpu6 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-6" 
+		::={ acosSystemDataCpuS 7 } 
+
+		cpu7 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-7" 
+		::={ acosSystemDataCpuS 8 } 
+
+		cpu8 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-8" 
+		::={ acosSystemDataCpuS 9 } 
+
+		cpu9 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-9" 
+		::={ acosSystemDataCpuS 10 } 
+
+		cpu10 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-10" 
+		::={ acosSystemDataCpuS 11 } 
+
+		cpu11 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-11" 
+		::={ acosSystemDataCpuS 12 } 
+
+		cpu12 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-12" 
+		::={ acosSystemDataCpuS 13 } 
+
+		cpu13 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-13" 
+		::={ acosSystemDataCpuS 14 } 
+
+		cpu14 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-14" 
+		::={ acosSystemDataCpuS 15 } 
+
+		cpu15 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-15" 
+		::={ acosSystemDataCpuS 16 } 
+
+		cpu16 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-16" 
+		::={ acosSystemDataCpuS 17 } 
+
+		cpu17 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-17" 
+		::={ acosSystemDataCpuS 18 } 
+
+		cpu18 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-18" 
+		::={ acosSystemDataCpuS 19 } 
+
+		cpu19 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-19" 
+		::={ acosSystemDataCpuS 20 } 
+
+		cpu20 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-20" 
+		::={ acosSystemDataCpuS 21 } 
+
+		cpu21 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-21" 
+		::={ acosSystemDataCpuS 22 } 
+
+		cpu22 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-22" 
+		::={ acosSystemDataCpuS 23 } 
+
+		cpu23 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-23" 
+		::={ acosSystemDataCpuS 24 } 
+
+		cpu24 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-24" 
+		::={ acosSystemDataCpuS 25 } 
+
+		cpu25 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-25" 
+		::={ acosSystemDataCpuS 26 } 
+
+		cpu26 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-26" 
+		::={ acosSystemDataCpuS 27 } 
+
+		cpu27 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-27" 
+		::={ acosSystemDataCpuS 28 } 
+
+		cpu28 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-28" 
+		::={ acosSystemDataCpuS 29 } 
+
+		cpu29 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-29" 
+		::={ acosSystemDataCpuS 30 } 
+
+		cpu30 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-30" 
+		::={ acosSystemDataCpuS 31 } 
+
+		cpu31 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-31" 
+		::={ acosSystemDataCpuS 32 } 
+
+		cpu32 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-32" 
+		::={ acosSystemDataCpuS 33 } 
+
+		cpu33 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-33" 
+		::={ acosSystemDataCpuS 34 } 
+
+		cpu34 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-34" 
+		::={ acosSystemDataCpuS 35 } 
+
+		cpu35 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-35" 
+		::={ acosSystemDataCpuS 36 } 
+
+		cpu36 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-36" 
+		::={ acosSystemDataCpuS 37 } 
+
+		cpu37 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-37" 
+		::={ acosSystemDataCpuS 38 } 
+
+		cpu38 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-38" 
+		::={ acosSystemDataCpuS 39 } 
+
+		cpu39 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-39" 
+		::={ acosSystemDataCpuS 40 } 
+
+		cpu40 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-40" 
+		::={ acosSystemDataCpuS 41 } 
+
+		cpu41 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-41" 
+		::={ acosSystemDataCpuS 42 } 
+
+		cpu42 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-42" 
+		::={ acosSystemDataCpuS 43 } 
+
+		cpu43 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-43" 
+		::={ acosSystemDataCpuS 44 } 
+
+		cpu44 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-44" 
+		::={ acosSystemDataCpuS 45 } 
+
+		cpu45 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-45" 
+		::={ acosSystemDataCpuS 46 } 
+
+		cpu46 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-46" 
+		::={ acosSystemDataCpuS 47 } 
+
+		cpu47 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-47" 
+		::={ acosSystemDataCpuS 48 } 
+
+		cpu48 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-48" 
+		::={ acosSystemDataCpuS 49 } 
+
+		cpu49 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-49" 
+		::={ acosSystemDataCpuS 50 } 
+
+		cpu50 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-50" 
+		::={ acosSystemDataCpuS 51 } 
+
+		cpu51 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-51" 
+		::={ acosSystemDataCpuS 52 } 
+
+		cpu52 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-52" 
+		::={ acosSystemDataCpuS 53 } 
+
+		cpu53 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-53" 
+		::={ acosSystemDataCpuS 54 } 
+
+		cpu54 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-54" 
+		::={ acosSystemDataCpuS 55 } 
+
+		cpu55 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-55" 
+		::={ acosSystemDataCpuS 56 } 
+
+		cpu56 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-56" 
+		::={ acosSystemDataCpuS 57 } 
+
+		cpu57 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-57" 
+		::={ acosSystemDataCpuS 58 } 
+
+		cpu58 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-58" 
+		::={ acosSystemDataCpuS 59 } 
+
+		cpu59 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-59" 
+		::={ acosSystemDataCpuS 60 } 
+
+		cpu60 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-60" 
+		::={ acosSystemDataCpuS 61 } 
+
+		cpu61 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-61" 
+		::={ acosSystemDataCpuS 62 } 
+
+		cpu62 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-62" 
+		::={ acosSystemDataCpuS 63 } 
+
+		cpu63 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-63" 
+		::={ acosSystemDataCpuS 64 } 
+
+		cpu64 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-64" 
+		::={ acosSystemDataCpuS 65 } 
+
+		cpu65 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-65" 
+		::={ acosSystemDataCpuS 66 } 
+
+		cpu66 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-66" 
+		::={ acosSystemDataCpuS 67 } 
+
+		cpu67 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-67" 
+		::={ acosSystemDataCpuS 68 } 
+
+		cpu68 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-68" 
+		::={ acosSystemDataCpuS 69 } 
+
+		cpu69 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-69" 
+		::={ acosSystemDataCpuS 70 } 
+
+		cpu70 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-70" 
+		::={ acosSystemDataCpuS 71 } 
+
+		cpu71 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-71" 
+		::={ acosSystemDataCpuS 72 } 
+
+		cpu72 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-72" 
+		::={ acosSystemDataCpuS 73 } 
+
+		cpu73 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-73" 
+		::={ acosSystemDataCpuS 74 } 
+
+		cpu74 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-74" 
+		::={ acosSystemDataCpuS 75 } 
+
+		cpu75 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-75" 
+		::={ acosSystemDataCpuS 76 } 
+
+		cpu76 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-76" 
+		::={ acosSystemDataCpuS 77 } 
+
+		cpu77 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-77" 
+		::={ acosSystemDataCpuS 78 } 
+
+		cpu78 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-78" 
+		::={ acosSystemDataCpuS 79 } 
+
+		cpu79 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-79" 
+		::={ acosSystemDataCpuS 80 } 
+
+		cpu80 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-80" 
+		::={ acosSystemDataCpuS 81 } 
+
+		cpu81 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-81" 
+		::={ acosSystemDataCpuS 82 } 
+
+		cpu82 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-82" 
+		::={ acosSystemDataCpuS 83 } 
+
+		cpu83 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-83" 
+		::={ acosSystemDataCpuS 84 } 
+
+		cpu84 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-84" 
+		::={ acosSystemDataCpuS 85 } 
+
+		cpu85 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-85" 
+		::={ acosSystemDataCpuS 86 } 
+
+		cpu86 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-86" 
+		::={ acosSystemDataCpuS 87 } 
+
+		cpu87 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-87" 
+		::={ acosSystemDataCpuS 88 } 
+
+		cpu88 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-88" 
+		::={ acosSystemDataCpuS 89 } 
+
+		cpu89 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-89" 
+		::={ acosSystemDataCpuS 90 } 
+
+		cpu90 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-90" 
+		::={ acosSystemDataCpuS 91 } 
+
+		cpu91 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-91" 
+		::={ acosSystemDataCpuS 92 } 
+
+		cpu92 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-92" 
+		::={ acosSystemDataCpuS 93 } 
+
+		cpu93 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-93" 
+		::={ acosSystemDataCpuS 94 } 
+
+		cpu94 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-94" 
+		::={ acosSystemDataCpuS 95 } 
+
+		cpu95 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-95" 
+		::={ acosSystemDataCpuS 96 } 
+
+		cpu96 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-96" 
+		::={ acosSystemDataCpuS 97 } 
+
+		cpu97 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-97" 
+		::={ acosSystemDataCpuS 98 } 
+
+		cpu98 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-98" 
+		::={ acosSystemDataCpuS 99 } 
+
+		cpu99 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-99" 
+		::={ acosSystemDataCpuS 100 } 
+
+		cpu100 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data CPU-100" 
+		::={ acosSystemDataCpuS 101 } 
+
+acosSystemMemory                    OBJECT IDENTIFIER ::= { acosSystem 23 }
+acosSystemMemoryS                   OBJECT IDENTIFIER ::= { acosSystemMemory 1 }
+
+		usagePercentage OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Memory Usage percentage" 
+		::={ acosSystemMemoryS 1 } 
+
+acosSystemThroughput                OBJECT IDENTIFIER ::= { acosSystem 38 }
+acosSystemThroughputS               OBJECT IDENTIFIER ::= { acosSystemThroughput 1 }
+
+		globalSystemThroughputBitsPerSec OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Global System throughput in bits/sec" 
+		::={ acosSystemThroughputS 1 } 
+
+		perPartThroughputBitsPerSec OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Partition throughput in bits/sec" 
+		::={ acosSystemThroughputS 2 } 
+
+acosSystemRadius                    OBJECT IDENTIFIER ::= { acosSystem 78 }
+acosSystemRadiusServer              OBJECT IDENTIFIER ::= { acosSystemRadius 1 }
+acosSystemRadiusServerS             OBJECT IDENTIFIER ::= { acosSystemRadiusServer 1 }
+
+		msisdnReceived OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "MSISDN Received" 
+		::={ acosSystemRadiusServerS 1 } 
+
+		imeiReceived OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "IMEI Received" 
+		::={ acosSystemRadiusServerS 2 } 
+
+		imsiReceived OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "IMSI Received" 
+		::={ acosSystemRadiusServerS 3 } 
+
+		customReceived OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Custom attribute Received" 
+		::={ acosSystemRadiusServerS 4 } 
+
+		radiusRequestReceived OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Request Received" 
+		::={ acosSystemRadiusServerS 5 } 
+
+		radiusRequestDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Request Dropped (Malformed Packet)" 
+		::={ acosSystemRadiusServerS 6 } 
+
+		requestBadSecretDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Request Bad Secret Dropped" 
+		::={ acosSystemRadiusServerS 7 } 
+
+		requestNoKeyVapDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Request No Key Attribute Dropped" 
+		::={ acosSystemRadiusServerS 8 } 
+
+		requestMalformedDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Request Malformed Dropped" 
+		::={ acosSystemRadiusServerS 9 } 
+
+		requestIgnored OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Request Ignored" 
+		::={ acosSystemRadiusServerS 10 } 
+
+		radiusTableFull OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Request Dropped (Table Full)" 
+		::={ acosSystemRadiusServerS 11 } 
+
+		secretNotConfiguredDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Secret Not Configured Dropped" 
+		::={ acosSystemRadiusServerS 12 } 
+
+		haStandbyDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Standby Dropped" 
+		::={ acosSystemRadiusServerS 13 } 
+
+		ipv6PrefixLengthMismatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Framed IPV6 Prefix Length Mismatch" 
+		::={ acosSystemRadiusServerS 14 } 
+
+		invalidKey OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Radius Request has Invalid Key Field" 
+		::={ acosSystemRadiusServerS 15 } 
+
+		smpCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS SMP Created" 
+		::={ acosSystemRadiusServerS 16 } 
+
+		smpDeleted OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS SMP Deleted" 
+		::={ acosSystemRadiusServerS 17 } 
+
+		smpMemAllocated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS SMP Memory Allocated" 
+		::={ acosSystemRadiusServerS 18 } 
+
+		smpMemAllocFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS SMP Memory Allocation Failed" 
+		::={ acosSystemRadiusServerS 19 } 
+
+		smpMemFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS SMP Memory Freed" 
+		::={ acosSystemRadiusServerS 20 } 
+
+		smpInRml OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS SMP in RML" 
+		::={ acosSystemRadiusServerS 21 } 
+
+		memAllocated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Memory Allocated" 
+		::={ acosSystemRadiusServerS 22 } 
+
+		memAllocFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Memory Allocation Failed" 
+		::={ acosSystemRadiusServerS 23 } 
+
+		memFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Memory Freed" 
+		::={ acosSystemRadiusServerS 24 } 
+
+		haSyncCreateSent OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Record Sync Create Sent" 
+		::={ acosSystemRadiusServerS 25 } 
+
+		haSyncDeleteSent OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Record Sync Delete Sent" 
+		::={ acosSystemRadiusServerS 26 } 
+
+		haSyncCreateRecv OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Record Sync Create Received" 
+		::={ acosSystemRadiusServerS 27 } 
+
+		haSyncDeleteRecv OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Record Sync Delete Received" 
+		::={ acosSystemRadiusServerS 28 } 
+
+		acctOnFiltersFull OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Acct On Request Ignored(Filters Full)" 
+		::={ acosSystemRadiusServerS 29 } 
+
+		acctOnDupRequest OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Duplicate RADIUS Acct On Request" 
+		::={ acosSystemRadiusServerS 30 } 
+
+		ipMismatchDelete OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Radius Entry IP Mismatch Delete" 
+		::={ acosSystemRadiusServerS 31 } 
+
+		ipAddRaceDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Radius Entry IP Add Race Drop" 
+		::={ acosSystemRadiusServerS 32 } 
+
+		haSyncNoKeyVapDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Record Sync No key dropped" 
+		::={ acosSystemRadiusServerS 33 } 
+
+		interCardMsgFailDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Inter-Card Message Fail Drop" 
+		::={ acosSystemRadiusServerS 34 } 
+
+		radiusPacketsRedirected OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS packets redirected (SO)" 
+		::={ acosSystemRadiusServerS 35 } 
+
+		radiusPacketsRedirectFailDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS packets dropped due to redirect failure (SO)" 
+		::={ acosSystemRadiusServerS 36 } 
+
+		radiusPacketsProcessLocal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS packets processed locally without redirection (SO)" 
+		::={ acosSystemRadiusServerS 37 } 
+
+		radiusPacketsDroppedNotLo OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS packets dropped dest not loopback (SO)" 
+		::={ acosSystemRadiusServerS 38 } 
+
+acosSystemGeolocList                OBJECT IDENTIFIER ::= { acosSystem 84 }
+acosSystemGeolocListS               OBJECT IDENTIFIER ::= { acosSystemGeolocList 1 }
+
+systemGeolocListSTable OBJECT-TYPE
+		SYNTAX SEQUENCE OF SystemGeolocListSEntry
+		MAX-ACCESS not-accessible
+		STATUS current
+		::={ acosSystemGeolocListS 1 } 
+
+
+	systemGeolocListSEntry OBJECT-TYPE
+		SYNTAX SystemGeolocListSEntry
+		MAX-ACCESS not-accessible
+		STATUS current
+		INDEX {
+			name
+		}
+		::={ systemGeolocListSTable 1 } 
+
+
+	SystemGeolocListSEntry ::=
+		SEQUENCE {
+			name DisplayString, 
+			hitCount CounterBasedGauge64,
+			totalGeoloc CounterBasedGauge64,
+			totalActive CounterBasedGauge64
+		}
+
+			name OBJECT-TYPE
+			SYNTAX  DisplayString 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Specify name of Geolocation list" 
+			::={ systemGeolocListSEntry 1 } 
+
+			hitCount OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "" 
+			::={ systemGeolocListSEntry 2 } 
+
+			totalGeoloc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "" 
+			::={ systemGeolocListSEntry 3 } 
+
+			totalActive OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "" 
+			::={ systemGeolocListSEntry 4 } 
+
+acosSystemGeolocNameHelper          OBJECT IDENTIFIER ::= { acosSystem 85 }
+acosSystemGeolocNameHelperS         OBJECT IDENTIFIER ::= { acosSystemGeolocNameHelper 1 }
+
+		placeHolder OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "place-holder" 
+		::={ acosSystemGeolocNameHelperS 1 } 
+
+acosSystemGeoloc                    OBJECT IDENTIFIER ::= { acosSystem 87 }
+acosSystemGeolocS                   OBJECT IDENTIFIER ::= { acosSystemGeoloc 1 }
+
+		placeHolder OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "place-holder" 
+		::={ acosSystemGeolocS 1 } 
+
+acosSystemAppPerformance            OBJECT IDENTIFIER ::= { acosSystem 71 }
+acosSystemAppPerformanceS           OBJECT IDENTIFIER ::= { acosSystemAppPerformance 1 }
+
+		totalThroughputBitsPerSec OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Throughput in bits/sec" 
+		::={ acosSystemAppPerformanceS 1 } 
+
+		l4ConnsPerSec OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "L4 Connections/sec" 
+		::={ acosSystemAppPerformanceS 2 } 
+
+		l7ConnsPerSec OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "L7 Connections/sec" 
+		::={ acosSystemAppPerformanceS 3 } 
+
+		l7TransPerSec OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "L7 Transactions/sec" 
+		::={ acosSystemAppPerformanceS 4 } 
+
+		sslConnsPerSec OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SSL Connections/sec" 
+		::={ acosSystemAppPerformanceS 5 } 
+
+		ipNatConnsPerSec OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "IP NAT Connections/sec" 
+		::={ acosSystemAppPerformanceS 6 } 
+
+		totalNewConnsPerSec OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total New Connections Established/sec" 
+		::={ acosSystemAppPerformanceS 7 } 
+
+		totalCurrConns OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Current Established Connections" 
+		::={ acosSystemAppPerformanceS 8 } 
+
+		l4Bandwidth OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "L4 Bandwidth in bits/sec" 
+		::={ acosSystemAppPerformanceS 9 } 
+
+		l7Bandwidth OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "L7 Bandwidth in bits/sec" 
+		::={ acosSystemAppPerformanceS 10 } 
+
+		servSslConnsPerSec OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Server SSL Connections/sec" 
+		::={ acosSystemAppPerformanceS 11 } 
+
+		fwConnsPerSec OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "FW Connections/sec" 
+		::={ acosSystemAppPerformanceS 12 } 
+
+		gifwConnsPerSec OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GiFW Connections/sec" 
+		::={ acosSystemAppPerformanceS 13 } 
+
+acosSystemSslReqQ                   OBJECT IDENTIFIER ::= { acosSystem 94 }
+acosSystemSslReqQS                  OBJECT IDENTIFIER ::= { acosSystemSslReqQ 1 }
+
+		numSslQueues OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "" 
+		::={ acosSystemSslReqQS 1 } 
+
+		sslReqQDepthTot OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "" 
+		::={ acosSystemSslReqQS 2 } 
+
+		sslReqQInuseTot OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "" 
+		::={ acosSystemSslReqQS 3 } 
+
+		sslHwQDepthTot OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "" 
+		::={ acosSystemSslReqQS 4 } 
+
+		sslHwQInuseTot OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "" 
+		::={ acosSystemSslReqQS 5 } 
+
+acosSystemTcp                       OBJECT IDENTIFIER ::= { acosSystem 48 }
+acosSystemTcpS                      OBJECT IDENTIFIER ::= { acosSystemTcp 1 }
+
+		activeopens OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Active open conns" 
+		::={ acosSystemTcpS 1 } 
+
+		passiveopens OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Passive open conns" 
+		::={ acosSystemTcpS 2 } 
+
+		attemptfails OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Connect attemp failures" 
+		::={ acosSystemTcpS 3 } 
+
+		estabresets OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Resets rcvd on EST conn" 
+		::={ acosSystemTcpS 4 } 
+
+		insegs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total in TCP packets" 
+		::={ acosSystemTcpS 5 } 
+
+		outsegs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total out TCP packets" 
+		::={ acosSystemTcpS 6 } 
+
+		retranssegs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Retransmited packets" 
+		::={ acosSystemTcpS 7 } 
+
+		inerrs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Input errors" 
+		::={ acosSystemTcpS 8 } 
+
+		outrsts OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reset Sent" 
+		::={ acosSystemTcpS 9 } 
+
+		sockAlloc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Sockets allocated" 
+		::={ acosSystemTcpS 10 } 
+
+		orphanCount OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Orphan sockets" 
+		::={ acosSystemTcpS 11 } 
+
+		memAlloc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Memory alloc" 
+		::={ acosSystemTcpS 12 } 
+
+		recvMem OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total rx buffer" 
+		::={ acosSystemTcpS 13 } 
+
+		sendMem OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total tx buffer" 
+		::={ acosSystemTcpS 14 } 
+
+		currestab OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Currently EST conns" 
+		::={ acosSystemTcpS 15 } 
+
+		currsyssnt OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP in SYN-SNT state" 
+		::={ acosSystemTcpS 16 } 
+
+		currsynrcv OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP in SYN-RCV state" 
+		::={ acosSystemTcpS 17 } 
+
+		currfinw1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP in FIN-W1 state" 
+		::={ acosSystemTcpS 18 } 
+
+		currfinw2 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP FIN-W2 state" 
+		::={ acosSystemTcpS 19 } 
+
+		currtimew OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP TimeW state" 
+		::={ acosSystemTcpS 20 } 
+
+		currclose OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP in Close state" 
+		::={ acosSystemTcpS 21 } 
+
+		currclsw OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP in CloseW state" 
+		::={ acosSystemTcpS 22 } 
+
+		currlack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP in LastACK state" 
+		::={ acosSystemTcpS 23 } 
+
+		currlstn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP in Listen state" 
+		::={ acosSystemTcpS 24 } 
+
+		currclsg OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP in Closing state" 
+		::={ acosSystemTcpS 25 } 
+
+		pawsactiverejected OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP paw active rej" 
+		::={ acosSystemTcpS 26 } 
+
+		synRcvRstack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Rcv RST|ACK on SYN" 
+		::={ acosSystemTcpS 27 } 
+
+		synRcvRst OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Rcv RST on SYN" 
+		::={ acosSystemTcpS 28 } 
+
+		synRcvAck OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Rcv ACK on SYN" 
+		::={ acosSystemTcpS 29 } 
+
+		axRexmitSyn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP rexmit SYN" 
+		::={ acosSystemTcpS 30 } 
+
+		tcpabortontimeout OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP abort on timeout" 
+		::={ acosSystemTcpS 31 } 
+
+		noroute OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCPIP out noroute" 
+		::={ acosSystemTcpS 32 } 
+
+		exceedmss OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "MSS exceeded pkt dropped" 
+		::={ acosSystemTcpS 33 } 
+
+		tfoConns OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TFO Total Connections" 
+		::={ acosSystemTcpS 34 } 
+
+		tfoActives OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TFO Current Actives" 
+		::={ acosSystemTcpS 35 } 
+
+		tfoDenied OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TFO Denied" 
+		::={ acosSystemTcpS 36 } 
+
+acosSystemIcmp                      OBJECT IDENTIFIER ::= { acosSystem 49 }
+acosSystemIcmpS                     OBJECT IDENTIFIER ::= { acosSystemIcmp 1 }
+
+		systemIcmpNum OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total number" 
+		::={ acosSystemIcmpS 1 } 
+
+		inmsgs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Messages" 
+		::={ acosSystemIcmpS 2 } 
+
+		inerrors OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Errors" 
+		::={ acosSystemIcmpS 3 } 
+
+		indestunreachs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Destination Unreachable" 
+		::={ acosSystemIcmpS 4 } 
+
+		intimeexcds OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In TTL Exceeds" 
+		::={ acosSystemIcmpS 5 } 
+
+		inparmprobs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Parameter Problem" 
+		::={ acosSystemIcmpS 6 } 
+
+		insrcquenchs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Source Quench Error" 
+		::={ acosSystemIcmpS 7 } 
+
+		inredirects OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Redirects" 
+		::={ acosSystemIcmpS 8 } 
+
+		inechos OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Echo requests" 
+		::={ acosSystemIcmpS 9 } 
+
+		inechoreps OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Echo replies" 
+		::={ acosSystemIcmpS 10 } 
+
+		intimestamps OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Timestamp" 
+		::={ acosSystemIcmpS 11 } 
+
+		intimestampreps OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Timestamp Rep" 
+		::={ acosSystemIcmpS 12 } 
+
+		inaddrmasks OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Address Masks" 
+		::={ acosSystemIcmpS 13 } 
+
+		inaddrmaskreps OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Address Mask Rep" 
+		::={ acosSystemIcmpS 14 } 
+
+		outmsgs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Message" 
+		::={ acosSystemIcmpS 15 } 
+
+		outerrors OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Errors" 
+		::={ acosSystemIcmpS 16 } 
+
+		outdestunreachs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Destination Unreachable" 
+		::={ acosSystemIcmpS 17 } 
+
+		outtimeexcds OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out TTL Exceeds" 
+		::={ acosSystemIcmpS 18 } 
+
+		outparmprobs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Parameter Problem" 
+		::={ acosSystemIcmpS 19 } 
+
+		outsrcquenchs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Source Quench Error" 
+		::={ acosSystemIcmpS 20 } 
+
+		outredirects OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Redirects" 
+		::={ acosSystemIcmpS 21 } 
+
+		outechos OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Echo Requests" 
+		::={ acosSystemIcmpS 22 } 
+
+		outechoreps OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Echo Replies" 
+		::={ acosSystemIcmpS 23 } 
+
+		outtimestamps OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Time Stamp" 
+		::={ acosSystemIcmpS 24 } 
+
+		outtimestampreps OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Time Stamp Rep" 
+		::={ acosSystemIcmpS 25 } 
+
+		outaddrmasks OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Address Mask" 
+		::={ acosSystemIcmpS 26 } 
+
+		outaddrmaskreps OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Address Mask Rep" 
+		::={ acosSystemIcmpS 27 } 
+
+acosSystemIcmp6                     OBJECT IDENTIFIER ::= { acosSystem 50 }
+acosSystemIcmp6S                    OBJECT IDENTIFIER ::= { acosSystemIcmp6 1 }
+
+		inMsgs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In messages" 
+		::={ acosSystemIcmp6S 1 } 
+
+		inErrors OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Errors" 
+		::={ acosSystemIcmp6S 2 } 
+
+		inDestUnReach OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Destunation Unreachable" 
+		::={ acosSystemIcmp6S 3 } 
+
+		inPktTooBig OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Packet too big" 
+		::={ acosSystemIcmp6S 4 } 
+
+		inTimeExceeds OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In TTL Exceeds" 
+		::={ acosSystemIcmp6S 5 } 
+
+		inParamProb OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Parameter Problem" 
+		::={ acosSystemIcmp6S 6 } 
+
+		inEchoes OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Echo requests" 
+		::={ acosSystemIcmp6S 7 } 
+
+		inExhoReply OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Echo replies" 
+		::={ acosSystemIcmp6S 8 } 
+
+		inGrpMemQuery OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Group member query" 
+		::={ acosSystemIcmp6S 9 } 
+
+		inGrpMemResp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Group member reply" 
+		::={ acosSystemIcmp6S 10 } 
+
+		inGrpMemReduction OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Group member reduction" 
+		::={ acosSystemIcmp6S 11 } 
+
+		inRouterSol OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Router solicitation" 
+		::={ acosSystemIcmp6S 12 } 
+
+		inRa OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Router advertisement" 
+		::={ acosSystemIcmp6S 13 } 
+
+		inNs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In neighbor solicitation" 
+		::={ acosSystemIcmp6S 14 } 
+
+		inNa OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In neighbor advertisement" 
+		::={ acosSystemIcmp6S 15 } 
+
+		inRedirect OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "In Redirects" 
+		::={ acosSystemIcmp6S 16 } 
+
+		outMsg OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Messages" 
+		::={ acosSystemIcmp6S 17 } 
+
+		outDstUnReach OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Destination Unreachable" 
+		::={ acosSystemIcmp6S 18 } 
+
+		outPktTooBig OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Packet too big" 
+		::={ acosSystemIcmp6S 19 } 
+
+		outTimeExceeds OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out TTL Exceeds" 
+		::={ acosSystemIcmp6S 20 } 
+
+		outParamProb OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Parameter Problem" 
+		::={ acosSystemIcmp6S 21 } 
+
+		outEchoReq OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Echo requests" 
+		::={ acosSystemIcmp6S 22 } 
+
+		outEchoReplies OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Echo replies" 
+		::={ acosSystemIcmp6S 23 } 
+
+		outRs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Router solicitation" 
+		::={ acosSystemIcmp6S 24 } 
+
+		outRa OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Router advertisement" 
+		::={ acosSystemIcmp6S 25 } 
+
+		outNs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out neighbor solicitation" 
+		::={ acosSystemIcmp6S 26 } 
+
+		outNa OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out neighbor advertisement" 
+		::={ acosSystemIcmp6S 27 } 
+
+		outRedirects OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Redirects" 
+		::={ acosSystemIcmp6S 28 } 
+
+		outMemResp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Group member reply" 
+		::={ acosSystemIcmp6S 29 } 
+
+		outMemReductions OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Group member reduction" 
+		::={ acosSystemIcmp6S 30 } 
+
+		errRs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Error Router solicitation" 
+		::={ acosSystemIcmp6S 31 } 
+
+		errRa OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Error Router advertisement" 
+		::={ acosSystemIcmp6S 32 } 
+
+		errNs OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Error Neighbor solicitation" 
+		::={ acosSystemIcmp6S 33 } 
+
+		errNa OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Error Neighbor advertisement" 
+		::={ acosSystemIcmp6S 34 } 
+
+		errRedirects OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Error Redirects" 
+		::={ acosSystemIcmp6S 35 } 
+
+		errEchoes OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Error Echo requests" 
+		::={ acosSystemIcmp6S 36 } 
+
+		errEchoReplies OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Error Echo replies" 
+		::={ acosSystemIcmp6S 37 } 
+
+acosSystemIpStats                   OBJECT IDENTIFIER ::= { acosSystem 51 }
+acosSystemIpStatsS                  OBJECT IDENTIFIER ::= { acosSystemIpStats 1 }
+
+		systemIpStatsInreceives OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming packets received" 
+		::={ acosSystemIpStatsS 1 } 
+
+		systemIpStatsInhdrerrors OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming packet header errors" 
+		::={ acosSystemIpStatsS 2 } 
+
+		systemIpStatsIntoobigerrors OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming packet too big errors" 
+		::={ acosSystemIpStatsS 3 } 
+
+		systemIpStatsInnoroutes OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming no route packet drops" 
+		::={ acosSystemIpStatsS 4 } 
+
+		systemIpStatsInhdrerrors OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming packet address errors" 
+		::={ acosSystemIpStatsS 5 } 
+
+		systemIpStatsInunknownprotos OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming unkown protocol packet drops" 
+		::={ acosSystemIpStatsS 6 } 
+
+		systemIpStatsIntruncatedpkts OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming truncated packets" 
+		::={ acosSystemIpStatsS 7 } 
+
+		systemIpStatsIndiscards OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming packets discarded" 
+		::={ acosSystemIpStatsS 8 } 
+
+		systemIpStatsIndelivers OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming packets delivered" 
+		::={ acosSystemIpStatsS 9 } 
+
+		systemIpStatsOutforwdatagrams OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing forwarded datagrams" 
+		::={ acosSystemIpStatsS 10 } 
+
+		systemIpStatsOutrequests OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing packets" 
+		::={ acosSystemIpStatsS 11 } 
+
+		systemIpStatsOutdiscards OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing packets discarded" 
+		::={ acosSystemIpStatsS 12 } 
+
+		systemIpStatsOutnoroutes OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing no route packet drops" 
+		::={ acosSystemIpStatsS 13 } 
+
+		systemIpStatsReasmtimeout OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reassembly timed out packet drops" 
+		::={ acosSystemIpStatsS 14 } 
+
+		systemIpStatsReasmreqds OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming reassembly requests" 
+		::={ acosSystemIpStatsS 15 } 
+
+		systemIpStatsReasmoks OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming reassembled packets" 
+		::={ acosSystemIpStatsS 16 } 
+
+		systemIpStatsReasmfails OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming reassembly requests failed" 
+		::={ acosSystemIpStatsS 17 } 
+
+		systemIpStatsFragoks OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing packets fragmented" 
+		::={ acosSystemIpStatsS 18 } 
+
+		systemIpStatsFragfails OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing packets fragmentation failed" 
+		::={ acosSystemIpStatsS 19 } 
+
+		systemIpStatsFragcreate OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing fragmented packets" 
+		::={ acosSystemIpStatsS 20 } 
+
+		systemIpStatsInmcastpkts OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming multicast packets" 
+		::={ acosSystemIpStatsS 21 } 
+
+		systemIpStatsOutmcastpkts OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing multicast packets" 
+		::={ acosSystemIpStatsS 22 } 
+
+acosSystemIp6Stats                  OBJECT IDENTIFIER ::= { acosSystem 52 }
+acosSystemIp6StatsS                 OBJECT IDENTIFIER ::= { acosSystemIp6Stats 1 }
+
+		inreceives OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming packets received" 
+		::={ acosSystemIp6StatsS 1 } 
+
+		inhdrerrors OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming packet header errors" 
+		::={ acosSystemIp6StatsS 2 } 
+
+		intoobigerrors OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming packet too big errors" 
+		::={ acosSystemIp6StatsS 3 } 
+
+		innoroutes OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming no route packet drops" 
+		::={ acosSystemIp6StatsS 4 } 
+
+		inaddrerrors OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming packet address errors" 
+		::={ acosSystemIp6StatsS 5 } 
+
+		inunknownprotos OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming unkown protocol packet drops" 
+		::={ acosSystemIp6StatsS 6 } 
+
+		intruncatedpkts OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming truncated packets" 
+		::={ acosSystemIp6StatsS 7 } 
+
+		indiscards OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming packets discarded" 
+		::={ acosSystemIp6StatsS 8 } 
+
+		indelivers OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming packets delivered" 
+		::={ acosSystemIp6StatsS 9 } 
+
+		outforwdatagrams OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing forwarded datagrams" 
+		::={ acosSystemIp6StatsS 10 } 
+
+		outrequests OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing packets" 
+		::={ acosSystemIp6StatsS 11 } 
+
+		outdiscards OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing packets discarded" 
+		::={ acosSystemIp6StatsS 12 } 
+
+		outnoroutes OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing no route packet drops" 
+		::={ acosSystemIp6StatsS 13 } 
+
+		reasmtimeout OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reassembly timed out packet drops" 
+		::={ acosSystemIp6StatsS 14 } 
+
+		reasmreqds OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming reassembly requests" 
+		::={ acosSystemIp6StatsS 15 } 
+
+		reasmoks OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming reassembled packets" 
+		::={ acosSystemIp6StatsS 16 } 
+
+		reasmfails OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming reassembly requests failed" 
+		::={ acosSystemIp6StatsS 17 } 
+
+		fragoks OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing packets fragmented" 
+		::={ acosSystemIp6StatsS 18 } 
+
+		fragfails OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing packets fragmentation failed" 
+		::={ acosSystemIp6StatsS 19 } 
+
+		fragcreates OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing fragmented packets" 
+		::={ acosSystemIp6StatsS 20 } 
+
+		inmcastpkts OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Incoming multicast packets" 
+		::={ acosSystemIp6StatsS 21 } 
+
+		outmcastpkts OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Outgoing multicast packets" 
+		::={ acosSystemIp6StatsS 22 } 
+
+acosSystemBfd                       OBJECT IDENTIFIER ::= { acosSystem 53 }
+acosSystemBfdS                      OBJECT IDENTIFIER ::= { acosSystemBfd 1 }
+
+		ipChecksumError OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "IP packet checksum errors" 
+		::={ acosSystemBfdS 1 } 
+
+		udpChecksumError OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "UDP packet checksum errors" 
+		::={ acosSystemBfdS 2 } 
+
+		sessionNotFound OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Session not found" 
+		::={ acosSystemBfdS 3 } 
+
+		multihopMismatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Multihop session or packet mismatch" 
+		::={ acosSystemBfdS 4 } 
+
+		versionMismatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "BFD version mismatch" 
+		::={ acosSystemBfdS 5 } 
+
+		lengthTooSmall OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Packets too small" 
+		::={ acosSystemBfdS 6 } 
+
+		dataIsShort OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Packet data length too short" 
+		::={ acosSystemBfdS 7 } 
+
+		invalidDetectMult OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Invalid detect multiplier" 
+		::={ acosSystemBfdS 8 } 
+
+		invalidMultipoint OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Invalid multipoint setting" 
+		::={ acosSystemBfdS 9 } 
+
+		invalidMyDisc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Invalid my descriptor" 
+		::={ acosSystemBfdS 10 } 
+
+		invalidTtl OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Invalid TTL" 
+		::={ acosSystemBfdS 11 } 
+
+		authLengthInvalid OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Invalid authentication length" 
+		::={ acosSystemBfdS 12 } 
+
+		authMismatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Authentication mismatch" 
+		::={ acosSystemBfdS 13 } 
+
+		authTypeMismatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Authentication type mismatch" 
+		::={ acosSystemBfdS 14 } 
+
+		authKeyIdMismatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Authentication key-id mismatch" 
+		::={ acosSystemBfdS 15 } 
+
+		authKeyMismatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Authentication key mismatch" 
+		::={ acosSystemBfdS 16 } 
+
+		authSeqnumInvalid OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Invalid authentication sequence number" 
+		::={ acosSystemBfdS 17 } 
+
+		authFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Authentication failures" 
+		::={ acosSystemBfdS 18 } 
+
+		localStateAdminDown OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Local admin down session state" 
+		::={ acosSystemBfdS 19 } 
+
+		destUnreachable OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Destination unreachable" 
+		::={ acosSystemBfdS 20 } 
+
+		noIpv6Enable OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "No IPv6 enable" 
+		::={ acosSystemBfdS 21 } 
+
+		systemBfdOtherError OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Other errors" 
+		::={ acosSystemBfdS 22 } 
+
+acosSystemIcmpRate                  OBJECT IDENTIFIER ::= { acosSystem 54 }
+acosSystemIcmpRateS                 OBJECT IDENTIFIER ::= { acosSystemIcmpRate 1 }
+
+		overLimitDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Over limit drops" 
+		::={ acosSystemIcmpRateS 1 } 
+
+		limitIntfDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Interfaces rate limit drops" 
+		::={ acosSystemIcmpRateS 2 } 
+
+		limitVserverDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Virtual Server rate limit drops" 
+		::={ acosSystemIcmpRateS 3 } 
+
+		limitTotalDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total rate limit drops" 
+		::={ acosSystemIcmpRateS 4 } 
+
+		lockupTimeLeft OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Lockup time left" 
+		::={ acosSystemIcmpRateS 5 } 
+
+		currRate OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Current rate" 
+		::={ acosSystemIcmpRateS 6 } 
+
+		v6OverLimitDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Over limit drops (v6)" 
+		::={ acosSystemIcmpRateS 7 } 
+
+		v6LimitIntfDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Interfaces rate limit drops (v6)" 
+		::={ acosSystemIcmpRateS 8 } 
+
+		v6LimitVserverDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Virtual Server rate limit drops (v6)" 
+		::={ acosSystemIcmpRateS 9 } 
+
+		v6LimitTotalDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total rate limit drops (v6)" 
+		::={ acosSystemIcmpRateS 10 } 
+
+		v6LockupTimeLeft OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Lockup time left (v6)" 
+		::={ acosSystemIcmpRateS 11 } 
+
+		v6CurrRate OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Current rate (v6)" 
+		::={ acosSystemIcmpRateS 12 } 
+
+acosSystemDns                       OBJECT IDENTIFIER ::= { acosSystem 92 }
+acosSystemDnsS                      OBJECT IDENTIFIER ::= { acosSystemDns 1 }
+
+		slbReq OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "No. of requests" 
+		::={ acosSystemDnsS 1 } 
+
+		slbResp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "No. of responses" 
+		::={ acosSystemDnsS 2 } 
+
+		slbNoResp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "No. of resource failures" 
+		::={ acosSystemDnsS 3 } 
+
+		slbReqRexmit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "No. of request retransmits" 
+		::={ acosSystemDnsS 4 } 
+
+		slbRespNoMatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "No. of requests with no response" 
+		::={ acosSystemDnsS 5 } 
+
+		slbNoResource OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "No. of resource failures" 
+		::={ acosSystemDnsS 6 } 
+
+		natReq OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "(NAT) No. of requests" 
+		::={ acosSystemDnsS 7 } 
+
+		natResp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "(NAT) No. of responses" 
+		::={ acosSystemDnsS 8 } 
+
+		natNoResp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "(NAT) No. of resource failures" 
+		::={ acosSystemDnsS 9 } 
+
+		natReqRexmit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "(NAT) No. of request retransmits" 
+		::={ acosSystemDnsS 10 } 
+
+		natRespNoMatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "(NAT) No. of requests with no response" 
+		::={ acosSystemDnsS 11 } 
+
+		natNoResource OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "(NAT) No. of resource failures" 
+		::={ acosSystemDnsS 12 } 
+
+		natXidReused OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "(NAT) No. of requests reusing a transaction id" 
+		::={ acosSystemDnsS 13 } 
+
+acosSystemDnsCache                  OBJECT IDENTIFIER ::= { acosSystem 93 }
+acosSystemDnsCacheS                 OBJECT IDENTIFIER ::= { acosSystemDnsCache 1 }
+
+		totalQ OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total query" 
+		::={ acosSystemDnsCacheS 1 } 
+
+		totalR OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total server response" 
+		::={ acosSystemDnsCacheS 2 } 
+
+		hit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total cache hit" 
+		::={ acosSystemDnsCacheS 3 } 
+
+		badQ OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Query not passed" 
+		::={ acosSystemDnsCacheS 4 } 
+
+		encodeQ OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Query encoded" 
+		::={ acosSystemDnsCacheS 5 } 
+
+		multipleQ OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Query with multiple questions" 
+		::={ acosSystemDnsCacheS 6 } 
+
+		oversizeQ OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Query exceed cache size" 
+		::={ acosSystemDnsCacheS 7 } 
+
+		badR OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Response not passed" 
+		::={ acosSystemDnsCacheS 8 } 
+
+		oversizeR OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Response exceed cache size" 
+		::={ acosSystemDnsCacheS 9 } 
+
+		encodeR OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Response encoded" 
+		::={ acosSystemDnsCacheS 10 } 
+
+		multipleR OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Response with multiple questions" 
+		::={ acosSystemDnsCacheS 11 } 
+
+		answerR OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Response with multiple answers" 
+		::={ acosSystemDnsCacheS 12 } 
+
+		ttlR OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Response with short TTL" 
+		::={ acosSystemDnsCacheS 13 } 
+
+		ageout OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total aged out" 
+		::={ acosSystemDnsCacheS 14 } 
+
+		badAnswer OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Bad Answer" 
+		::={ acosSystemDnsCacheS 15 } 
+
+		ageoutWeight OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total aged for lower weight" 
+		::={ acosSystemDnsCacheS 16 } 
+
+		totalLog OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total stats log sent" 
+		::={ acosSystemDnsCacheS 17 } 
+
+		totalAlloc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total allocated" 
+		::={ acosSystemDnsCacheS 18 } 
+
+		dnsTotalFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total freed" 
+		::={ acosSystemDnsCacheS 19 } 
+
+		currentAllocate OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Current allocate" 
+		::={ acosSystemDnsCacheS 20 } 
+
+		currentDataAllocate OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Current data allocate" 
+		::={ acosSystemDnsCacheS 21 } 
+
+acosSystemSession                   OBJECT IDENTIFIER ::= { acosSystem 55 }
+acosSystemSessionS                  OBJECT IDENTIFIER ::= { acosSystemSession 1 }
+
+		systemSessionTotalL4Conn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total L4 Count" 
+		::={ acosSystemSessionS 1 } 
+
+		connCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn Count" 
+		::={ acosSystemSessionS 2 } 
+
+		connFreedCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn Freed" 
+		::={ acosSystemSessionS 3 } 
+
+		totalL4PacketCount OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total L4 Packet Count" 
+		::={ acosSystemSessionS 4 } 
+
+		totalL7PacketCount OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total L7 Packet Count" 
+		::={ acosSystemSessionS 5 } 
+
+		totalL4ConnProxy OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total L4 Conn Proxy Count" 
+		::={ acosSystemSessionS 6 } 
+
+		systemSessionTotalL7Conn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total L7 Conn" 
+		::={ acosSystemSessionS 7 } 
+
+		systemSessionTotalTcpConn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total TCP Conn" 
+		::={ acosSystemSessionS 8 } 
+
+		currFreeConn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Curr Free Conn" 
+		::={ acosSystemSessionS 9 } 
+
+		tcpEstCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP Established" 
+		::={ acosSystemSessionS 10 } 
+
+		tcpHalfOpenCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP Half Open" 
+		::={ acosSystemSessionS 11 } 
+
+		tcpHalfCloseCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP Half Closed" 
+		::={ acosSystemSessionS 12 } 
+
+		udpCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "UDP Count" 
+		::={ acosSystemSessionS 13 } 
+
+		ipCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "IP Count" 
+		::={ acosSystemSessionS 14 } 
+
+		otherCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Non TCP/UDP IP sessions" 
+		::={ acosSystemSessionS 15 } 
+
+		reverseNatTcpCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse NAT TCP" 
+		::={ acosSystemSessionS 16 } 
+
+		reverseNatUdpCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse NAT UDP" 
+		::={ acosSystemSessionS 17 } 
+
+		tcpSynHalfOpenCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP SYN Half Open" 
+		::={ acosSystemSessionS 18 } 
+
+		connSmpAllocCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn SMP Alloc" 
+		::={ acosSystemSessionS 19 } 
+
+		connSmpFreeCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn SMP Free" 
+		::={ acosSystemSessionS 20 } 
+
+		connSmpAgedCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn SMP Aged" 
+		::={ acosSystemSessionS 21 } 
+
+		sslCountCurr OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Curr SSL Count" 
+		::={ acosSystemSessionS 22 } 
+
+		sslCountTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Count" 
+		::={ acosSystemSessionS 23 } 
+
+		serverSslCountCurr OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Current SSL Server Count" 
+		::={ acosSystemSessionS 24 } 
+
+		serverSslCountTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Server Count" 
+		::={ acosSystemSessionS 25 } 
+
+		clientSslReuseTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Client Reuse" 
+		::={ acosSystemSessionS 26 } 
+
+		serverSslReuseTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Server Reuse" 
+		::={ acosSystemSessionS 27 } 
+
+		sslFailedTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Failures" 
+		::={ acosSystemSessionS 28 } 
+
+		sslFailedCaVerification OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SSL Cert Auth Verification Errors" 
+		::={ acosSystemSessionS 29 } 
+
+		sslServerCertError OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SSL Server Cert Errors" 
+		::={ acosSystemSessionS 30 } 
+
+		sslClientCertAuthFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SSL Client Cert Auth Failures" 
+		::={ acosSystemSessionS 31 } 
+
+		totalIpNatConn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total IP Nat Conn" 
+		::={ acosSystemSessionS 32 } 
+
+		totalL2l3Conn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Totl L2/L3 Connections" 
+		::={ acosSystemSessionS 33 } 
+
+		clientSslCtxMallocFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Client SSL Ctx malloc Failures" 
+		::={ acosSystemSessionS 34 } 
+
+		connType0Available OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn Type 0 Available" 
+		::={ acosSystemSessionS 35 } 
+
+		connType1Available OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn Type 1 Available" 
+		::={ acosSystemSessionS 36 } 
+
+		connType2Available OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn Type 2 Available" 
+		::={ acosSystemSessionS 37 } 
+
+		connType3Available OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn Type 3 Available" 
+		::={ acosSystemSessionS 38 } 
+
+		connType4Available OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn Type 4 Available" 
+		::={ acosSystemSessionS 39 } 
+
+		connSmpType0Available OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn SMP Type 0 Available" 
+		::={ acosSystemSessionS 40 } 
+
+		connSmpType1Available OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn SMP Type 1 Available" 
+		::={ acosSystemSessionS 41 } 
+
+		connSmpType2Available OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn SMP Type 2 Available" 
+		::={ acosSystemSessionS 42 } 
+
+		connSmpType3Available OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn SMP Type 3 Available" 
+		::={ acosSystemSessionS 43 } 
+
+		connSmpType4Available OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn SMP Type 4 Available" 
+		::={ acosSystemSessionS 44 } 
+
+		sctpHalfOpenCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SCTP Half Open" 
+		::={ acosSystemSessionS 45 } 
+
+		sctpEstCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SCTP Established" 
+		::={ acosSystemSessionS 46 } 
+
+		nonsslBypass OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "NON SSL Bypass Count" 
+		::={ acosSystemSessionS 47 } 
+
+		sslFailsafeTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Failsafe Count" 
+		::={ acosSystemSessionS 48 } 
+
+		sslForwardProxyFailedHandshakeTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy Failed Handshake Count" 
+		::={ acosSystemSessionS 49 } 
+
+		sslForwardProxyFailedTcpTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy Failed TCP Count" 
+		::={ acosSystemSessionS 50 } 
+
+		sslForwardProxyFailedCryptoTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy Failed Crypto Count" 
+		::={ acosSystemSessionS 51 } 
+
+		sslForwardProxyFailedCertVerifyTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy Failed Certificate Verification Count" 
+		::={ acosSystemSessionS 52 } 
+
+		sslForwardProxyInvalidOcspStaplingTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy Invalid OCSP Stapling Count" 
+		::={ acosSystemSessionS 53 } 
+
+		sslForwardProxyRevokedOcspTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy Revoked OCSP Response Count" 
+		::={ acosSystemSessionS 54 } 
+
+		sslForwardProxyFailedCertSigningTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy Failed Certificate Signing Count" 
+		::={ acosSystemSessionS 55 } 
+
+		sslForwardProxyFailedSslVersionTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy Unsupported version Count" 
+		::={ acosSystemSessionS 56 } 
+
+		sslForwardProxySniBypassTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy SNI Bypass Count" 
+		::={ acosSystemSessionS 57 } 
+
+		sslForwardProxyClientAuthBypassTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy Client Auth Bypass Count" 
+		::={ acosSystemSessionS 58 } 
+
+		connAppSmpAllocCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn APP SMP Alloc" 
+		::={ acosSystemSessionS 59 } 
+
+		diameterConnCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Diameter Conn Count" 
+		::={ acosSystemSessionS 60 } 
+
+		diameterConnFreedCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Diameter Conn Freed" 
+		::={ acosSystemSessionS 61 } 
+
+		debugTcpCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Hidden TCP sessions for CGNv6 Stateless Technologies" 
+		::={ acosSystemSessionS 62 } 
+
+		debugUdpCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Hidden UDP sessions for CGNv6 Stateless Technologies" 
+		::={ acosSystemSessionS 63 } 
+
+		totalFwConn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Firewall Conn" 
+		::={ acosSystemSessionS 64 } 
+
+		totalLocalConn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Local Conn" 
+		::={ acosSystemSessionS 65 } 
+
+		totalCurrConn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Curr Conn" 
+		::={ acosSystemSessionS 66 } 
+
+		clientSslFatalAlert OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "client ssl fatal alert" 
+		::={ acosSystemSessionS 67 } 
+
+		clientSslFinRst OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "client ssl fin rst" 
+		::={ acosSystemSessionS 68 } 
+
+		fpSessionFinRst OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "FP Session FIN/RST" 
+		::={ acosSystemSessionS 69 } 
+
+		serverSslFatalAlert OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "server ssl fatal alert" 
+		::={ acosSystemSessionS 70 } 
+
+		serverSslFinRst OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "server ssl fin rst" 
+		::={ acosSystemSessionS 71 } 
+
+		clientTemplateIntErr OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "client template internal error" 
+		::={ acosSystemSessionS 72 } 
+
+		clientTemplateUnknownErr OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "client template unknown error" 
+		::={ acosSystemSessionS 73 } 
+
+		serverTemplateIntErr OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "server template int error" 
+		::={ acosSystemSessionS 74 } 
+
+		serverTemplateUnknownErr OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "server template unknown error" 
+		::={ acosSystemSessionS 75 } 
+
+		totalDebugConn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Debug Conn" 
+		::={ acosSystemSessionS 76 } 
+
+		sslForwardProxyFailedAflexTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy AFLEX Count" 
+		::={ acosSystemSessionS 77 } 
+
+		sslForwardProxyCertSubjectBypassTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy Certificate Subject Bypass Count" 
+		::={ acosSystemSessionS 78 } 
+
+		sslForwardProxyCertIssuerBypassTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy Certificate Issuer Bypass Count" 
+		::={ acosSystemSessionS 79 } 
+
+		sslForwardProxyCertSanBypassTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy Certificate SAN Bypass Count" 
+		::={ acosSystemSessionS 80 } 
+
+		sslForwardProxyNoSniBypassTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy No SNI Bypass Count" 
+		::={ acosSystemSessionS 81 } 
+
+		sslForwardProxyNoSniResetTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy No SNI reset Count" 
+		::={ acosSystemSessionS 82 } 
+
+		sslForwardProxyUsernameBypassTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy Username Bypass Count" 
+		::={ acosSystemSessionS 83 } 
+
+		sslForwardProxyAdGrpupBypassTotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total SSL Forward Proxy AD-Group Bypass Count" 
+		::={ acosSystemSessionS 84 } 
+
+		diameterConcurrentUserSessionsCounter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Diameter Concurrent User-Sessions" 
+		::={ acosSystemSessionS 85 } 
+
+acosSystemNdiscRa                   OBJECT IDENTIFIER ::= { acosSystem 56 }
+acosSystemNdiscRaS                  OBJECT IDENTIFIER ::= { acosSystemNdiscRa 1 }
+
+		goodRecv OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Good Router Solicitations (R.S.) Received" 
+		::={ acosSystemNdiscRaS 1 } 
+
+		periodicSent OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Periodic Router Advertisements (R.A.) Sent" 
+		::={ acosSystemNdiscRaS 2 } 
+
+		rateLimit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "R.S. Rate Limited" 
+		::={ acosSystemNdiscRaS 3 } 
+
+		badHopLimit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "R.S. Bad Hop Limit" 
+		::={ acosSystemNdiscRaS 4 } 
+
+		truncated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "R.S. Truncated" 
+		::={ acosSystemNdiscRaS 5 } 
+
+		badIcmpv6Csum OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "R.S. Bad ICMPv6 Checksum" 
+		::={ acosSystemNdiscRaS 6 } 
+
+		badIcmpv6Code OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "R.S. Unknown ICMPv6 Code" 
+		::={ acosSystemNdiscRaS 7 } 
+
+		badIcmpv6Option OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "R.S. Bad ICMPv6 Option" 
+		::={ acosSystemNdiscRaS 8 } 
+
+		l2AddrAndUnspec OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "R.S. Src Link-Layer Option and Unspecified Address" 
+		::={ acosSystemNdiscRaS 9 } 
+
+		noFreeBuffers OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "No Free Buffers to send R.A." 
+		::={ acosSystemNdiscRaS 10 } 
+
+acosSystemTcpStats                  OBJECT IDENTIFIER ::= { acosSystem 57 }
+acosSystemTcpStatsS                 OBJECT IDENTIFIER ::= { acosSystemTcpStats 1 }
+
+		connattempt OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Connect initiated" 
+		::={ acosSystemTcpStatsS 1 } 
+
+		connects OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Connect established" 
+		::={ acosSystemTcpStatsS 2 } 
+
+		drops OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Connect dropped" 
+		::={ acosSystemTcpStatsS 3 } 
+
+		conndrops OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Embryonic connect dropped" 
+		::={ acosSystemTcpStatsS 4 } 
+
+		closed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Connect closed" 
+		::={ acosSystemTcpStatsS 5 } 
+
+		segstimed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Segs to get RTT" 
+		::={ acosSystemTcpStatsS 6 } 
+
+		rttupdated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Update RTT" 
+		::={ acosSystemTcpStatsS 7 } 
+
+		delack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Delayed acks sent" 
+		::={ acosSystemTcpStatsS 8 } 
+
+		timeoutdrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Conn dropped in rxmt timeout" 
+		::={ acosSystemTcpStatsS 9 } 
+
+		rexmttimeo OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Retransmit timeout" 
+		::={ acosSystemTcpStatsS 10 } 
+
+		persisttimeo OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Persist timeout" 
+		::={ acosSystemTcpStatsS 11 } 
+
+		keeptimeo OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Keepalive timeout" 
+		::={ acosSystemTcpStatsS 12 } 
+
+		keepprobe OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Keepalive probe sent" 
+		::={ acosSystemTcpStatsS 13 } 
+
+		keepdrops OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Connect dropped in keepalive" 
+		::={ acosSystemTcpStatsS 14 } 
+
+		sndtotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total packet sent" 
+		::={ acosSystemTcpStatsS 15 } 
+
+		sndpack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data packet sent" 
+		::={ acosSystemTcpStatsS 16 } 
+
+		sndbyte OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data bytes sent" 
+		::={ acosSystemTcpStatsS 17 } 
+
+		sndrexmitpack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data packet retransmit" 
+		::={ acosSystemTcpStatsS 18 } 
+
+		sndrexmitbyte OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data byte retransmit" 
+		::={ acosSystemTcpStatsS 19 } 
+
+		sndrexmitbad OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Unnecessary packet retransmit" 
+		::={ acosSystemTcpStatsS 20 } 
+
+		sndacks OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Ack packet sent" 
+		::={ acosSystemTcpStatsS 21 } 
+
+		sndprobe OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Window probe sent" 
+		::={ acosSystemTcpStatsS 22 } 
+
+		sndurg OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "URG packet sent" 
+		::={ acosSystemTcpStatsS 23 } 
+
+		sndwinup OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Window update packet sent" 
+		::={ acosSystemTcpStatsS 24 } 
+
+		sndctrl OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SYN|FIN|RST packet sent" 
+		::={ acosSystemTcpStatsS 25 } 
+
+		sndrst OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RST packet sent" 
+		::={ acosSystemTcpStatsS 26 } 
+
+		sndfin OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "FIN packet sent" 
+		::={ acosSystemTcpStatsS 27 } 
+
+		sndsyn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SYN packet sent" 
+		::={ acosSystemTcpStatsS 28 } 
+
+		rcvtotal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total packet received" 
+		::={ acosSystemTcpStatsS 29 } 
+
+		rcvpack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Packet received" 
+		::={ acosSystemTcpStatsS 30 } 
+
+		rcvbyte OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Bytes received" 
+		::={ acosSystemTcpStatsS 31 } 
+
+		rcvbadoff OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Packet received with bad offset" 
+		::={ acosSystemTcpStatsS 32 } 
+
+		rcvmemdrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Packet dropped for lack of memory" 
+		::={ acosSystemTcpStatsS 33 } 
+
+		rcvduppack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Duplicate packet received" 
+		::={ acosSystemTcpStatsS 35 } 
+
+		rcvdupbyte OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Duplicate bytes received" 
+		::={ acosSystemTcpStatsS 36 } 
+
+		rcvpartduppack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Packet with some duplicate data" 
+		::={ acosSystemTcpStatsS 37 } 
+
+		rcvpartdupbyte OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Dup. bytes in part-dup. packets" 
+		::={ acosSystemTcpStatsS 38 } 
+
+		rcvoopack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out-of-order packet received" 
+		::={ acosSystemTcpStatsS 39 } 
+
+		rcvoobyte OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out-of-order bytes received" 
+		::={ acosSystemTcpStatsS 40 } 
+
+		rcvpackafterwin OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Packets with data after window" 
+		::={ acosSystemTcpStatsS 41 } 
+
+		rcvbyteafterwin OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Bytes rcvd after window" 
+		::={ acosSystemTcpStatsS 42 } 
+
+		rcvwinprobe OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Rcvd window probe packet" 
+		::={ acosSystemTcpStatsS 43 } 
+
+		rcvdupack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Rcvd duplicate acks" 
+		::={ acosSystemTcpStatsS 44 } 
+
+		rcvacktoomuch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Rcvd acks for unsent data" 
+		::={ acosSystemTcpStatsS 45 } 
+
+		rcvackpack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Rcvd ack packets" 
+		::={ acosSystemTcpStatsS 46 } 
+
+		rcvackbyte OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Bytes acked by rcvd acks" 
+		::={ acosSystemTcpStatsS 47 } 
+
+		rcvwinupd OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Rcvd window update packets" 
+		::={ acosSystemTcpStatsS 48 } 
+
+		pawsdrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Segments dropped due to PAWS" 
+		::={ acosSystemTcpStatsS 49 } 
+
+		predack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Hdr predict for acks" 
+		::={ acosSystemTcpStatsS 50 } 
+
+		preddat OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Hdr predict for data pkts" 
+		::={ acosSystemTcpStatsS 51 } 
+
+		persistdrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Timeout in persist state" 
+		::={ acosSystemTcpStatsS 52 } 
+
+		badrst OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Ignored RST" 
+		::={ acosSystemTcpStatsS 54 } 
+
+		finwait2Drops OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Drop FIN_WAIT_2 connection after time limit" 
+		::={ acosSystemTcpStatsS 55 } 
+
+		sackRecoveryEpisode OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SACK recovery episodes" 
+		::={ acosSystemTcpStatsS 56 } 
+
+		sackRexmits OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SACK rexmit segments" 
+		::={ acosSystemTcpStatsS 57 } 
+
+		sackRexmitBytes OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SACK rexmit bytes" 
+		::={ acosSystemTcpStatsS 58 } 
+
+		sackRcvBlocks OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SACK received" 
+		::={ acosSystemTcpStatsS 59 } 
+
+		sackSendBlocks OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SACK sent" 
+		::={ acosSystemTcpStatsS 60 } 
+
+		sndcack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Challenge ACK sent" 
+		::={ acosSystemTcpStatsS 63 } 
+
+		cacklim OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Challenge ACK limited" 
+		::={ acosSystemTcpStatsS 64 } 
+
+		reassmemdrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Packet dropped during reassembly" 
+		::={ acosSystemTcpStatsS 65 } 
+
+		reasstimeout OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reassembly Time Out" 
+		::={ acosSystemTcpStatsS 92 } 
+
+		ccIdle OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Congestion control window set do to idle" 
+		::={ acosSystemTcpStatsS 66 } 
+
+		ccReduce OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Congestion control window reduced by event" 
+		::={ acosSystemTcpStatsS 67 } 
+
+		rcvdsack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Rcvd DSACK packets" 
+		::={ acosSystemTcpStatsS 68 } 
+
+		a2brcvwnd OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "ATCP to BTCP receive window" 
+		::={ acosSystemTcpStatsS 69 } 
+
+		a2bsackpresent OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "ATCP to BTCP SACK options present" 
+		::={ acosSystemTcpStatsS 70 } 
+
+		a2bdupack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "ATCP to BTCP Dup/OO ACK" 
+		::={ acosSystemTcpStatsS 71 } 
+
+		a2brxdata OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "ATCP to BTCP Rxmitted data" 
+		::={ acosSystemTcpStatsS 72 } 
+
+		a2btcpoptions OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "ATCP to BTCP unsupported TCP options" 
+		::={ acosSystemTcpStatsS 73 } 
+
+		a2boodata OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "ATCP to BTCP oo data received" 
+		::={ acosSystemTcpStatsS 74 } 
+
+		a2bpartialack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "ATCP to BTCP partial ack received" 
+		::={ acosSystemTcpStatsS 75 } 
+
+		a2bfsmtransition OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "ATCP to BTCP state machine transition" 
+		::={ acosSystemTcpStatsS 76 } 
+
+		a2btransitionnum OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "ATCP to BTCP total transitions" 
+		::={ acosSystemTcpStatsS 81 } 
+
+		b2atransitionnum OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "ATCP to BTCP total transitions" 
+		::={ acosSystemTcpStatsS 82 } 
+
+		badIochan OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "IO Channel Modified" 
+		::={ acosSystemTcpStatsS 83 } 
+
+		atcpforward OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Adaptive TCP forward" 
+		::={ acosSystemTcpStatsS 84 } 
+
+		atcpsent OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Adaptive TCP sent" 
+		::={ acosSystemTcpStatsS 85 } 
+
+		atcprexmitsadrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Adaptive TCP transmit SA drops" 
+		::={ acosSystemTcpStatsS 86 } 
+
+		atcpsendbackack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Adaptive TCP sendback ACK" 
+		::={ acosSystemTcpStatsS 87 } 
+
+		atcprexmit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Adaptive TCP retransmits" 
+		::={ acosSystemTcpStatsS 88 } 
+
+		atcpbuffallocfail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Adaptive TCP buffer allocation fails" 
+		::={ acosSystemTcpStatsS 89 } 
+
+		a2bappbuffering OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transition to full stack on when application buffers too much data" 
+		::={ acosSystemTcpStatsS 90 } 
+
+		atcpsendfail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Adaptive TCP sent fails" 
+		::={ acosSystemTcpStatsS 91 } 
+
+		earlyrexmit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Early Retransmission sent" 
+		::={ acosSystemTcpStatsS 93 } 
+
+		mburstlim OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Maxburst limited tx" 
+		::={ acosSystemTcpStatsS 94 } 
+
+		a2bsndwnd OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "ATCP to BTCP send window" 
+		::={ acosSystemTcpStatsS 95 } 
+
+END
+

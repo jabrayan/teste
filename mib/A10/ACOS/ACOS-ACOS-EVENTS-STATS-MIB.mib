@@ -1,0 +1,362 @@
+ACOS-ACOS-EVENTS-STATS-MIB DEFINITIONS ::= BEGIN
+	IMPORTS
+		DisplayString, PhysAddress
+		FROM SNMPv2-TC
+	InetAddressType
+		FROM INET-ADDRESS-MIB
+	acosRootStats
+		FROM A10-AX-MIB
+	MODULE-IDENTITY, OBJECT-TYPE, Counter32, Integer32, Counter64, OBJECT-IDENTITY, NOTIFICATION-TYPE
+		FROM SNMPv2-SMI;
+		acosAcosEvents MODULE-IDENTITY
+				LAST-UPDATED	"200705071327Z"
+				ORGANIZATION	"A10 Networks, Inc."
+				CONTACT-INFO	"Address: A10 Networks, Inc.
+							  3 West Pumeria Dr.
+							  San Jose, CA 95131
+						 Phone:   +1-888-822-7210 (USA/Canada)
+						          +1-408-325-8676 (International)
+						 E-mail:  support@A10Networks.com"
+
+				DESCRIPTION	 "AcosEvents OID for ACOS"
+				::=  {  acosRootStats 104  }
+
+acosAcosEventsLogServer             OBJECT IDENTIFIER ::= { acosAcosEvents 3 }
+acosAcosEventsLogServerS            OBJECT IDENTIFIER ::= { acosAcosEventsLogServer 1 }
+
+acosEventsLogServerSTable OBJECT-TYPE
+		SYNTAX SEQUENCE OF AcosEventsLogServerSEntry
+		MAX-ACCESS not-accessible
+		STATUS current
+		::={ acosAcosEventsLogServerS 1 } 
+
+
+	acosEventsLogServerSEntry OBJECT-TYPE
+		SYNTAX AcosEventsLogServerSEntry
+		MAX-ACCESS not-accessible
+		STATUS current
+		INDEX {
+			name
+		}
+		::={ acosEventsLogServerSTable 1 } 
+
+
+	AcosEventsLogServerSEntry ::=
+		SEQUENCE {
+			name DisplayString, 
+			msgsSent CounterBasedGauge64
+		}
+
+			name OBJECT-TYPE
+			SYNTAX  DisplayString 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Server Name" 
+			::={ acosEventsLogServerSEntry 1 } 
+
+			msgsSent OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Number of log messages sent" 
+			::={ acosEventsLogServerSEntry 2 } 
+
+acosAcosEventsCollectorGroup        OBJECT IDENTIFIER ::= { acosAcosEvents 4 }
+acosAcosEventsCollectorGroupS       OBJECT IDENTIFIER ::= { acosAcosEventsCollectorGroup 1 }
+
+acosEventsCollectorGroupSTable OBJECT-TYPE
+		SYNTAX SEQUENCE OF AcosEventsCollectorGroupSEntry
+		MAX-ACCESS not-accessible
+		STATUS current
+		::={ acosAcosEventsCollectorGroupS 1 } 
+
+
+	acosEventsCollectorGroupSEntry OBJECT-TYPE
+		SYNTAX AcosEventsCollectorGroupSEntry
+		MAX-ACCESS not-accessible
+		STATUS current
+		INDEX {
+			name
+		}
+		::={ acosEventsCollectorGroupSTable 1 } 
+
+
+	AcosEventsCollectorGroupSEntry ::=
+		SEQUENCE {
+			name DisplayString, 
+			msgsSent CounterBasedGauge64,
+			msgsRateLimited CounterBasedGauge64,
+			msgsDropped CounterBasedGauge64
+		}
+
+			name OBJECT-TYPE
+			SYNTAX  DisplayString 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Specify log server group name" 
+			::={ acosEventsCollectorGroupSEntry 1 } 
+
+			msgsSent OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Number of log messages sent" 
+			::={ acosEventsCollectorGroupSEntry 2 } 
+
+			msgsRateLimited OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Number of rate limited log messages" 
+			::={ acosEventsCollectorGroupSEntry 3 } 
+
+			msgsDropped OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Number of messages dropped for other reasons" 
+			::={ acosEventsCollectorGroupSEntry 4 } 
+
+acosAcosEventsStatistics            OBJECT IDENTIFIER ::= { acosAcosEvents 8 }
+acosAcosEventsStatisticsS           OBJECT IDENTIFIER ::= { acosAcosEventsStatistics 1 }
+
+		msgSent OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages sent, to Remote" 
+		::={ acosAcosEventsStatisticsS 1 } 
+
+		msgSentLogdb OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages sent, to LogDB" 
+		::={ acosAcosEventsStatisticsS 2 } 
+
+		msgDroppedFormatNotDefined OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, format not defined" 
+		::={ acosAcosEventsStatisticsS 3 } 
+
+		msgDroppedMallocFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, malloc failure" 
+		::={ acosAcosEventsStatisticsS 4 } 
+
+		msgDroppedNoTemplate OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, no active template" 
+		::={ acosAcosEventsStatisticsS 5 } 
+
+		msgDroppedSelector OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, selector does not enable msg" 
+		::={ acosAcosEventsStatisticsS 6 } 
+
+		msgDroppedTooLong OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, invalid length" 
+		::={ acosAcosEventsStatisticsS 7 } 
+
+		msgDroppedCraftFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, msg crafting failed" 
+		::={ acosAcosEventsStatisticsS 8 } 
+
+		msgDroppedLocalLogRatelimit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, local log ratelimited" 
+		::={ acosAcosEventsStatisticsS 9 } 
+
+		msgDroppedRemoteLogRatelimit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, remote log ratelimited" 
+		::={ acosAcosEventsStatisticsS 10 } 
+
+		msgDroppedSendFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, send failed" 
+		::={ acosAcosEventsStatisticsS 11 } 
+
+		msgDroppedNoActiveMember OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, no active member in collector grp" 
+		::={ acosAcosEventsStatisticsS 12 } 
+
+		msgDroppedRouteFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, Route lookup failed" 
+		::={ acosAcosEventsStatisticsS 13 } 
+
+		msgDroppedOther OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, unexpected error" 
+		::={ acosAcosEventsStatisticsS 14 } 
+
+		noTemplate OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Message API called, with no active template" 
+		::={ acosAcosEventsStatisticsS 15 } 
+
+		msgDroppedLostDuringConfigChange OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, lost during config change" 
+		::={ acosAcosEventsStatisticsS 16 } 
+
+		localEnqueuePass OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages enqueue to Logd passed" 
+		::={ acosAcosEventsStatisticsS 17 } 
+
+		msgSentToLogd OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages sent to Logd via IPC" 
+		::={ acosAcosEventsStatisticsS 18 } 
+
+		msgRetryAfterSocketFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages retried to be sent to Logd via IPC" 
+		::={ acosAcosEventsStatisticsS 19 } 
+
+		msgSentDirectSyslog OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages sent to syslog directly from axlog" 
+		::={ acosAcosEventsStatisticsS 20 } 
+
+		msgDroppedSendToLogdFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, send to Logd via IPC failed" 
+		::={ acosAcosEventsStatisticsS 21 } 
+
+		msgDroppedTrylockFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, Trylock failed in axlog" 
+		::={ acosAcosEventsStatisticsS 22 } 
+
+		msgDroppedRemoteCplaneLogRatelimit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, Remote cplane log ratelimited" 
+		::={ acosAcosEventsStatisticsS 23 } 
+
+		msgDroppedRemoteDplaneLogRatelimit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, Remote dplane log ratelimited" 
+		::={ acosAcosEventsStatisticsS 24 } 
+
+		msgDroppedLocalEnqueueFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, Enqueue to Logd failed" 
+		::={ acosAcosEventsStatisticsS 25 } 
+
+		msgDroppedGrpNotUsed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, Collector group not used" 
+		::={ acosAcosEventsStatisticsS 26 } 
+
+		msgSentRemoteCplane OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Sent, to remote in logd" 
+		::={ acosAcosEventsStatisticsS 27 } 
+
+		msgDroppedNoTemplateLogd OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, no active template in Logd" 
+		::={ acosAcosEventsStatisticsS 28 } 
+
+		msgDroppedLostDuringConfigChangeLogd OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, lost during config change in Logd" 
+		::={ acosAcosEventsStatisticsS 29 } 
+
+		msgDroppedCraftFailLogd OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, msg crafting failed in Logd" 
+		::={ acosAcosEventsStatisticsS 30 } 
+
+		msgDroppedSendFailedLogd OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, send failed in Logd" 
+		::={ acosAcosEventsStatisticsS 31 } 
+
+		msgDroppedNoActiveMemberLogd OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, no active member in collector grp in Logd" 
+		::={ acosAcosEventsStatisticsS 32 } 
+
+		msgDroppedOtherLogd OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, unexpected error in Logd" 
+		::={ acosAcosEventsStatisticsS 33 } 
+
+		msgDroppedInvalidPart OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Messages Dropped, Invalid partition Id" 
+		::={ acosAcosEventsStatisticsS 34 } 
+
+END
+

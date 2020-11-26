@@ -1,0 +1,2055 @@
+ACOS-WAF-STATS-MIB DEFINITIONS ::= BEGIN
+	IMPORTS
+		DisplayString, PhysAddress
+		FROM SNMPv2-TC
+	InetAddressType
+		FROM INET-ADDRESS-MIB
+	acosRootStats
+		FROM A10-AX-MIB
+	MODULE-IDENTITY, OBJECT-TYPE, Counter32, Integer32, Counter64, OBJECT-IDENTITY, NOTIFICATION-TYPE
+		FROM SNMPv2-SMI;
+		acosWaf MODULE-IDENTITY
+				LAST-UPDATED	"200705071327Z"
+				ORGANIZATION	"A10 Networks, Inc."
+				CONTACT-INFO	"Address: A10 Networks, Inc.
+							  3 West Pumeria Dr.
+							  San Jose, CA 95131
+						 Phone:   +1-888-822-7210 (USA/Canada)
+						          +1-408-325-8676 (International)
+						 E-mail:  support@A10Networks.com"
+
+				DESCRIPTION	 "Waf OID for ACOS"
+				::=  {  acosRootStats 111  }
+
+acosWafGlobal                       OBJECT IDENTIFIER ::= { acosWaf 1 }
+acosWafGlobalS                      OBJECT IDENTIFIER ::= { acosWafGlobal 1 }
+
+		totalReq OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Requests" 
+		::={ acosWafGlobalS 1 } 
+
+		reqAllowed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Requests Allowed" 
+		::={ acosWafGlobalS 2 } 
+
+		reqDenied OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Requests Denied" 
+		::={ acosWafGlobalS 3 } 
+
+		botCheckSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Botnet Check Success" 
+		::={ acosWafGlobalS 4 } 
+
+		botCheckFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Botnet Check Failure" 
+		::={ acosWafGlobalS 5 } 
+
+		formConsistencySucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Form Consistency Success" 
+		::={ acosWafGlobalS 6 } 
+
+		formConsistencyFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Form Consistency Failure" 
+		::={ acosWafGlobalS 7 } 
+
+		formCsrfTagSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Form CSRF tag Success" 
+		::={ acosWafGlobalS 8 } 
+
+		formCsrfTagFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Form CSRF tag Failure" 
+		::={ acosWafGlobalS 9 } 
+
+		urlCheckSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "URL Check Success" 
+		::={ acosWafGlobalS 10 } 
+
+		urlCheckFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "URL Check Failure" 
+		::={ acosWafGlobalS 11 } 
+
+		urlCheckLearn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "URL Check Learn" 
+		::={ acosWafGlobalS 12 } 
+
+		bufOvfUrlLenFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Buffer Overflow - URL Length Failure" 
+		::={ acosWafGlobalS 13 } 
+
+		bufOvfCookieLenFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Buffer Overflow - Cookie Length Failure" 
+		::={ acosWafGlobalS 14 } 
+
+		bufOvfHdrsLenFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Buffer Overflow - Headers length Failure" 
+		::={ acosWafGlobalS 15 } 
+
+		bufOvfPostSizeFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Buffer Overflow - Post size Failure" 
+		::={ acosWafGlobalS 16 } 
+
+		maxCookiesFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Max Cookies Failure" 
+		::={ acosWafGlobalS 17 } 
+
+		maxHdrsFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Max Headers Failure" 
+		::={ acosWafGlobalS 18 } 
+
+		httpMethodCheckSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Http Method Check Success" 
+		::={ acosWafGlobalS 19 } 
+
+		httpMethodCheckFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Http Method Check Failure" 
+		::={ acosWafGlobalS 20 } 
+
+		httpCheckSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Http Check Success" 
+		::={ acosWafGlobalS 21 } 
+
+		httpCheckFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Http Check Failure" 
+		::={ acosWafGlobalS 22 } 
+
+		refererCheckSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Referer Check Success" 
+		::={ acosWafGlobalS 23 } 
+
+		refererCheckFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Referer Check Failure" 
+		::={ acosWafGlobalS 24 } 
+
+		refererCheckRedirect OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Referer Check Redirect" 
+		::={ acosWafGlobalS 25 } 
+
+		uriWlistSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "URI White List Success" 
+		::={ acosWafGlobalS 26 } 
+
+		uriWlistFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "URI White List Failure" 
+		::={ acosWafGlobalS 27 } 
+
+		uriBlistSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "URI Black List Success" 
+		::={ acosWafGlobalS 28 } 
+
+		uriBlistFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "URI Black List Failure" 
+		::={ acosWafGlobalS 29 } 
+
+		postFormCheckSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Post Form Check Success" 
+		::={ acosWafGlobalS 30 } 
+
+		postFormCheckSanitize OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Post Form Check Sanitized" 
+		::={ acosWafGlobalS 31 } 
+
+		postFormCheckReject OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Post Form Check Rejected" 
+		::={ acosWafGlobalS 32 } 
+
+		ccnMaskAmex OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Credit Card Number Mask Amex" 
+		::={ acosWafGlobalS 33 } 
+
+		ccnMaskDiners OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Credit Card Number Mask Diners" 
+		::={ acosWafGlobalS 34 } 
+
+		ccnMaskVisa OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Credit Card Number Mask Visa" 
+		::={ acosWafGlobalS 35 } 
+
+		ccnMaskMastercard OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Credit Card Number Mask Mastercard" 
+		::={ acosWafGlobalS 36 } 
+
+		ccnMaskDiscover OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Credit Card Number Mask Discover" 
+		::={ acosWafGlobalS 37 } 
+
+		ccnMaskJcb OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Credit Card Number Mask Jcb" 
+		::={ acosWafGlobalS 38 } 
+
+		ssnMask OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Social Security Number Mask" 
+		::={ acosWafGlobalS 39 } 
+
+		pcreMask OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "PCRE Mask" 
+		::={ acosWafGlobalS 40 } 
+
+		cookieEncryptSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Cookie Encrypt Success" 
+		::={ acosWafGlobalS 41 } 
+
+		cookieEncryptFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Cookie Encrypt Failure" 
+		::={ acosWafGlobalS 42 } 
+
+		cookieEncryptLimitExceeded OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Cookie Encrypt Limit Exceeded" 
+		::={ acosWafGlobalS 43 } 
+
+		cookieEncryptSkipRcache OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Cookie Encrypt Skip RCache" 
+		::={ acosWafGlobalS 44 } 
+
+		cookieDecryptSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Cookie Decrypt Success" 
+		::={ acosWafGlobalS 45 } 
+
+		cookieDecryptFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Cookie Decrypt Failure" 
+		::={ acosWafGlobalS 46 } 
+
+		sqliaChkUrlSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SQLIA Check URL Success" 
+		::={ acosWafGlobalS 47 } 
+
+		sqliaChkUrlSanitize OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SQLIA Check URL Sanitized" 
+		::={ acosWafGlobalS 48 } 
+
+		sqliaChkUrlReject OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SQLIA Check URL Rejected" 
+		::={ acosWafGlobalS 49 } 
+
+		sqliaChkPostSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SQLIA Check Post Success" 
+		::={ acosWafGlobalS 50 } 
+
+		sqliaChkPostSanitize OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SQLIA Check Post Sanitized" 
+		::={ acosWafGlobalS 51 } 
+
+		sqliaChkPostReject OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SQLIA Check Post Rejected" 
+		::={ acosWafGlobalS 52 } 
+
+		xssChkCookieSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XSS Check Cookie Success" 
+		::={ acosWafGlobalS 53 } 
+
+		xssChkCookieSanitize OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XSS Check Cookie Sanitized" 
+		::={ acosWafGlobalS 54 } 
+
+		xssChkCookieReject OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XSS Check Cookie Rejected" 
+		::={ acosWafGlobalS 55 } 
+
+		xssChkUrlSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XSS Check URL Success" 
+		::={ acosWafGlobalS 56 } 
+
+		xssChkUrlSanitize OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XSS Check URL Sanitized" 
+		::={ acosWafGlobalS 57 } 
+
+		xssChkUrlReject OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XSS Check URL Rejected" 
+		::={ acosWafGlobalS 58 } 
+
+		xssChkPostSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XSS Check Post Success" 
+		::={ acosWafGlobalS 59 } 
+
+		xssChkPostSanitize OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XSS Check Post Sanitized" 
+		::={ acosWafGlobalS 60 } 
+
+		xssChkPostReject OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XSS Check Post Rejected" 
+		::={ acosWafGlobalS 61 } 
+
+		respCodeHidden OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Response Code Hidden" 
+		::={ acosWafGlobalS 62 } 
+
+		respHdrsFiltered OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Response Headers Filtered" 
+		::={ acosWafGlobalS 63 } 
+
+		learnUpdates OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Learning Updates" 
+		::={ acosWafGlobalS 64 } 
+
+		numDrops OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Number Drops" 
+		::={ acosWafGlobalS 65 } 
+
+		numResets OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Number Resets" 
+		::={ acosWafGlobalS 66 } 
+
+		formNonSslReject OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Form Non SSL Rejected" 
+		::={ acosWafGlobalS 67 } 
+
+		formNonPostReject OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Form Non Post Rejected" 
+		::={ acosWafGlobalS 68 } 
+
+		sessCheckNone OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Session Check None" 
+		::={ acosWafGlobalS 69 } 
+
+		sessCheckSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Session Check Success" 
+		::={ acosWafGlobalS 70 } 
+
+		sessCheckFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Session Check Failure" 
+		::={ acosWafGlobalS 71 } 
+
+		soapCheckSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Soap Check Success" 
+		::={ acosWafGlobalS 72 } 
+
+		soapCheckFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Soap Check Failure" 
+		::={ acosWafGlobalS 73 } 
+
+		wsdlFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "WSDL Failure" 
+		::={ acosWafGlobalS 74 } 
+
+		wsdlSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "WSDL Success" 
+		::={ acosWafGlobalS 75 } 
+
+		xmlSchemaFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Schema Failure" 
+		::={ acosWafGlobalS 76 } 
+
+		xmlSchemaSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Schema Success" 
+		::={ acosWafGlobalS 77 } 
+
+		xmlSqliaChkFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Sqlia Check Failure" 
+		::={ acosWafGlobalS 78 } 
+
+		xmlSqliaChkSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Sqlia Check Success" 
+		::={ acosWafGlobalS 79 } 
+
+		xmlXssChkFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML XSS Check Failure" 
+		::={ acosWafGlobalS 80 } 
+
+		xmlXssChkSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML XSS Check Success" 
+		::={ acosWafGlobalS 81 } 
+
+		jsonCheckFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "JSON Check Failure" 
+		::={ acosWafGlobalS 82 } 
+
+		jsonCheckSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "JSON Check Success" 
+		::={ acosWafGlobalS 83 } 
+
+		xmlCheckFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Check Failure" 
+		::={ acosWafGlobalS 84 } 
+
+		xmlCheckSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Check Success" 
+		::={ acosWafGlobalS 85 } 
+
+		bufOvfCookieValueLenFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Buffer Overflow - Cookie Value Length Failure" 
+		::={ acosWafGlobalS 86 } 
+
+		bufOvfCookiesLenFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Buffer Overflow - Cookies Length Failure" 
+		::={ acosWafGlobalS 87 } 
+
+		bufOvfHdrNameLenFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Buffer Overflow - Header Name Length Failure" 
+		::={ acosWafGlobalS 88 } 
+
+		bufOvfHdrValueLenFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Buffer Overflow - Header Value Length Failure" 
+		::={ acosWafGlobalS 89 } 
+
+		bufOvfMaxDataParseFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Buffer Overflow - Max Data Parse Failure" 
+		::={ acosWafGlobalS 90 } 
+
+		bufOvfLineLenFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Buffer Overflow - Line Length Failure" 
+		::={ acosWafGlobalS 91 } 
+
+		bufOvfParameterNameLenFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Buffer Overflow - HTML Parameter Name Length Failure" 
+		::={ acosWafGlobalS 92 } 
+
+		bufOvfParameterValueLenFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Buffer Overflow - HTML Parameter Value Length Failure" 
+		::={ acosWafGlobalS 93 } 
+
+		bufOvfParameterTotalLenFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Buffer Overflow - HTML Parameter Total Length Failure" 
+		::={ acosWafGlobalS 94 } 
+
+		bufOvfQueryLenFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Buffer Overflow - Query Length Failure" 
+		::={ acosWafGlobalS 95 } 
+
+		maxEntitiesFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Max Entities Failure" 
+		::={ acosWafGlobalS 96 } 
+
+		maxParametersFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Max Parameters Failure" 
+		::={ acosWafGlobalS 97 } 
+
+		bufOvfCookieNameLenFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Buffer Overflow - Cookie Name Length Failure" 
+		::={ acosWafGlobalS 98 } 
+
+		xmlLimitAttr OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Limit Attribue" 
+		::={ acosWafGlobalS 99 } 
+
+		xmlLimitAttrNameLen OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Limit Name Length" 
+		::={ acosWafGlobalS 100 } 
+
+		xmlLimitAttrValueLen OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Limit Value Length" 
+		::={ acosWafGlobalS 101 } 
+
+		xmlLimitCdataLen OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Limit CData Length" 
+		::={ acosWafGlobalS 102 } 
+
+		xmlLimitElem OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Limit Element" 
+		::={ acosWafGlobalS 103 } 
+
+		xmlLimitElemChild OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Limit Element Child" 
+		::={ acosWafGlobalS 104 } 
+
+		xmlLimitElemDepth OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Limit Element Depth" 
+		::={ acosWafGlobalS 105 } 
+
+		xmlLimitElemNameLen OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Limit Element Name Length" 
+		::={ acosWafGlobalS 106 } 
+
+		xmlLimitEntityExp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Limit Entity Exp" 
+		::={ acosWafGlobalS 107 } 
+
+		xmlLimitEntityExpDepth OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Limit Entity Exp Depth" 
+		::={ acosWafGlobalS 108 } 
+
+		xmlLimitNamespace OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Limit Namespace" 
+		::={ acosWafGlobalS 109 } 
+
+		xmlLimitNamespaceUriLen OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "XML Limit Namespace URI Length" 
+		::={ acosWafGlobalS 110 } 
+
+		jsonLimitArrayValueCount OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "JSON Limit Array Value Count" 
+		::={ acosWafGlobalS 111 } 
+
+		jsonLimitDepth OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "JSON Limit Depth" 
+		::={ acosWafGlobalS 112 } 
+
+		jsonLimitObjectMemberCount OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "JSON Limit Object Number Count" 
+		::={ acosWafGlobalS 113 } 
+
+		jsonLimitString OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "JSON Limit String" 
+		::={ acosWafGlobalS 114 } 
+
+		formNonMaskedPassword OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Form Non Masked Password" 
+		::={ acosWafGlobalS 115 } 
+
+		formNonSslPassword OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Form Non SSL Password" 
+		::={ acosWafGlobalS 116 } 
+
+		formPasswordAutocomplete OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Form Password Autocomplete" 
+		::={ acosWafGlobalS 117 } 
+
+		redirectWlistSucc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Redirect Whitelist Success" 
+		::={ acosWafGlobalS 118 } 
+
+		redirectWlistFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Redirect Whitelist Failure" 
+		::={ acosWafGlobalS 119 } 
+
+		redirectWlistLearn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Redirect Whitelist Learn" 
+		::={ acosWafGlobalS 120 } 
+
+		formSetNoCache OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Form Set No Cache" 
+		::={ acosWafGlobalS 121 } 
+
+		respDenied OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Responses Denied" 
+		::={ acosWafGlobalS 122 } 
+
+		sessionsAlloc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Sessions allocated" 
+		::={ acosWafGlobalS 123 } 
+
+		sessionsFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Sessions freed" 
+		::={ acosWafGlobalS 124 } 
+
+		outOfSessions OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out of sessions" 
+		::={ acosWafGlobalS 125 } 
+
+		tooManySessions OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Too many sessions consumed" 
+		::={ acosWafGlobalS 126 } 
+
+		called OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Threshold check count" 
+		::={ acosWafGlobalS 127 } 
+
+		permitted OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Honor threshold  count" 
+		::={ acosWafGlobalS 128 } 
+
+		bruteForceSuccess OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Brute-force checks passed" 
+		::={ acosWafGlobalS 129 } 
+
+		bruteForceFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Brute-force checks failed" 
+		::={ acosWafGlobalS 130 } 
+
+		challengeCookieSent OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Cookie challenge sent" 
+		::={ acosWafGlobalS 131 } 
+
+		challengeJavascriptSent OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "JavaScript challenge sent" 
+		::={ acosWafGlobalS 132 } 
+
+		challengeCaptchaSent OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Captcha challenge sent" 
+		::={ acosWafGlobalS 133 } 
+
+acosWafTemplate                     OBJECT IDENTIFIER ::= { acosWaf 5 }
+acosWafTemplateS                    OBJECT IDENTIFIER ::= { acosWafTemplate 1 }
+
+wafTemplateSTable OBJECT-TYPE
+		SYNTAX SEQUENCE OF WafTemplateSEntry
+		MAX-ACCESS not-accessible
+		STATUS current
+		::={ acosWafTemplateS 1 } 
+
+
+	wafTemplateSEntry OBJECT-TYPE
+		SYNTAX WafTemplateSEntry
+		MAX-ACCESS not-accessible
+		STATUS current
+		INDEX {
+			wafTemplateName
+		}
+		::={ wafTemplateSTable 1 } 
+
+
+	WafTemplateSEntry ::=
+		SEQUENCE {
+			wafTemplateName DisplayString, 
+			wafTemplateTotalReq CounterBasedGauge64,
+			wafTemplateReqAllowed CounterBasedGauge64,
+			wafTemplateReqDenied CounterBasedGauge64,
+			wafTemplateBotCheckSucc CounterBasedGauge64,
+			wafTemplateBotCheckFail CounterBasedGauge64,
+			wafTemplateFormConsistencySucc CounterBasedGauge64,
+			wafTemplateFormConsistencyFail CounterBasedGauge64,
+			wafTemplateFormCsrfTagSucc CounterBasedGauge64,
+			wafTemplateFormCsrfTagFail CounterBasedGauge64,
+			wafTemplateUrlCheckSucc CounterBasedGauge64,
+			wafTemplateUrlCheckFail CounterBasedGauge64,
+			wafTemplateUrlCheckLearn CounterBasedGauge64,
+			wafTemplateBufOvfUrlLenFail CounterBasedGauge64,
+			wafTemplateBufOvfCookieLenFail CounterBasedGauge64,
+			wafTemplateBufOvfHdrsLenFail CounterBasedGauge64,
+			wafTemplateBufOvfPostSizeFail CounterBasedGauge64,
+			wafTemplateMaxCookiesFail CounterBasedGauge64,
+			wafTemplateMaxHdrsFail CounterBasedGauge64,
+			wafTemplateHttpMethodCheckSucc CounterBasedGauge64,
+			wafTemplateHttpMethodCheckFail CounterBasedGauge64,
+			wafTemplateHttpCheckSucc CounterBasedGauge64,
+			wafTemplateHttpCheckFail CounterBasedGauge64,
+			wafTemplateRefererCheckSucc CounterBasedGauge64,
+			wafTemplateRefererCheckFail CounterBasedGauge64,
+			wafTemplateRefererCheckRedirect CounterBasedGauge64,
+			wafTemplateUriWlistSucc CounterBasedGauge64,
+			wafTemplateUriWlistFail CounterBasedGauge64,
+			wafTemplateUriBlistSucc CounterBasedGauge64,
+			wafTemplateUriBlistFail CounterBasedGauge64,
+			wafTemplatePostFormCheckSucc CounterBasedGauge64,
+			wafTemplatePostFormCheckSanitize CounterBasedGauge64,
+			wafTemplatePostFromCheckReject CounterBasedGauge64,
+			wafTemplateCcnMaskAmex CounterBasedGauge64,
+			wafTemplateCcnMaskDiners CounterBasedGauge64,
+			wafTemplateCcnMaskVisa CounterBasedGauge64,
+			wafTemplateCcnMaskMastercard CounterBasedGauge64,
+			wafTemplateCcnMaskDiscover CounterBasedGauge64,
+			wafTemplateHttpCcnMaskJob CounterBasedGauge64,
+			wafTemplateSsnMask CounterBasedGauge64,
+			wafTemplatePcreMask CounterBasedGauge64,
+			wafTemplateCookieEncryptSucc CounterBasedGauge64,
+			wafTemplateCookieEncryptFail CounterBasedGauge64,
+			wafTemplateCookieEncryptLimitExceeded CounterBasedGauge64,
+			wafTemplateCookieEncryptSkipRcache CounterBasedGauge64,
+			wafTemplateCookieDecryptSucc CounterBasedGauge64,
+			wafTemplateCookieDecryptFail CounterBasedGauge64,
+			wafTemplateSqliaChkUrlSucc CounterBasedGauge64,
+			wafTemplateSqliaChkUrlSanitize CounterBasedGauge64,
+			wafTemplateSqliaChkUrlReject CounterBasedGauge64,
+			wafTemplateSqliaChkPostSucc CounterBasedGauge64,
+			wafTemplateSqliaChkPostSanitize CounterBasedGauge64,
+			wafTemplateSqliaChkPostReject CounterBasedGauge64,
+			wafTemplateXssChkCookieSucc CounterBasedGauge64,
+			wafTemplateXssChkCookieSanitize CounterBasedGauge64,
+			wafTemplateXssChkCookieReject CounterBasedGauge64,
+			wafTemplateXssChkUrlSucc CounterBasedGauge64,
+			wafTemplateXssChkUrlSanitize CounterBasedGauge64,
+			wafTemplateXssChkUrlReject CounterBasedGauge64,
+			wafTemplateChkPostSucc CounterBasedGauge64,
+			wafTemplateXssChkPostSanitize CounterBasedGauge64,
+			wafTemplateXssChkPostReject CounterBasedGauge64,
+			wafTemplateRespCodeHidden CounterBasedGauge64,
+			wafTemplateRespHdrsFiltered CounterBasedGauge64,
+			wafTemplateLearnUpdates CounterBasedGauge64,
+			wafTemplateNumDrops CounterBasedGauge64,
+			wafTemplateNumResets CounterBasedGauge64,
+			wafTemplateFormNonSslReject CounterBasedGauge64,
+			wafTemplateFromNonPostReject CounterBasedGauge64,
+			wafTemplateSessCheckNone CounterBasedGauge64,
+			wafTemplateSessCheckSucc CounterBasedGauge64,
+			wafTemplateSessCheckFail CounterBasedGauge64,
+			wafTemplateSoapCheckSucc CounterBasedGauge64,
+			wafTemplateSoapCheckFailure CounterBasedGauge64,
+			wafTemplateWsdlFail CounterBasedGauge64,
+			wafTemplateWsdlSucc CounterBasedGauge64,
+			wafTemplateXmlSchemaFail CounterBasedGauge64,
+			wafTemplateXmlSchemaSucc CounterBasedGauge64,
+			wafTemplateXmlSqliaChkFail CounterBasedGauge64,
+			wafTemplateXmlSqliaChkSucc CounterBasedGauge64,
+			wafTemplateXmlXssChkFail CounterBasedGauge64,
+			wafTemplateXmlXssChkSucc CounterBasedGauge64,
+			wafTemplateJsonChekFailure CounterBasedGauge64,
+			wafTemplateJsonCheckSucc CounterBasedGauge64,
+			wafTemplateXmlCheckFailure CounterBasedGauge64,
+			wafTemplateXmlCheckSucc CounterBasedGauge64,
+			wafTemplateBufOvfCookieValueLenFail CounterBasedGauge64,
+			wafTemplateBufOvfCookiesLenFail CounterBasedGauge64,
+			wafTemplateBufOvfHdrNameLenFail CounterBasedGauge64,
+			wafTemplateBufOvfHdrValueLenFail CounterBasedGauge64,
+			wafTemplateBufOvfMaxDataParseFail CounterBasedGauge64,
+			wafTemplateBufOvfLineLenFail CounterBasedGauge64,
+			wafTemplateBufOvfParameterNameLenFail CounterBasedGauge64,
+			wafTemplateBufOvfParameterValueLenFail CounterBasedGauge64,
+			wafTemplateBufOvfParameterTotalLenFail CounterBasedGauge64,
+			wafTemplateBufOvfQueryLenFail CounterBasedGauge64,
+			wafTemplateMaxEntitiesFail CounterBasedGauge64,
+			wafTemplateMaxParametersFail CounterBasedGauge64,
+			wafTemplateBufOvfCookieNameLenFail CounterBasedGauge64,
+			wafTemplateXmlLimitAttr CounterBasedGauge64,
+			wafTemplateXmlLimitAttrNameLen CounterBasedGauge64,
+			wafTemplateXmlLimitAttrValueLen CounterBasedGauge64,
+			wafTemplateXmlLimitCdataLen CounterBasedGauge64,
+			wafTemplateXmlLimitElem CounterBasedGauge64,
+			wafTemplateXmlLimitElemChild CounterBasedGauge64,
+			wafTemplateXmlLimitElemDepth CounterBasedGauge64,
+			wafTemplateXmlLimitElemNameLen CounterBasedGauge64,
+			wafTemplateXmlLimitEntityExp CounterBasedGauge64,
+			wafTemplateXmlLimitEntityExpDepth CounterBasedGauge64,
+			wafTemplateXmlLimitNamespace CounterBasedGauge64,
+			wafTemplateXmlLimitNamespaceUriLen CounterBasedGauge64,
+			wafTemplateJsonLimitArrayValueCount CounterBasedGauge64,
+			wafTemplateJsonLimitDepth CounterBasedGauge64,
+			wafTemplateJsonLimitObjectMemberCount CounterBasedGauge64,
+			wafTemplateJsonLimitString CounterBasedGauge64,
+			wafTemplateFormNonMaskedPassword CounterBasedGauge64,
+			wafTemplateFormNonSslPassword CounterBasedGauge64,
+			wafTemplateFormPasswordAutocomplete CounterBasedGauge64,
+			wafTemplateRedirectWlistSucc CounterBasedGauge64,
+			wafTemplateRedirectWlistFail CounterBasedGauge64,
+			wafTemplateRedirectWlistLearn CounterBasedGauge64,
+			wafTemplateFormSetNoCache CounterBasedGauge64,
+			wafTemplateRespDenied CounterBasedGauge64,
+			wafTemplateSessionsAlloc CounterBasedGauge64,
+			wafTemplateSessionsFreed CounterBasedGauge64,
+			wafTemplateOutOfSessions CounterBasedGauge64,
+			wafTemplateTooManySessions CounterBasedGauge64,
+			wafTemplateCalled CounterBasedGauge64,
+			wafTemplatePermitted CounterBasedGauge64,
+			wafTemplateBruteForceSuccess CounterBasedGauge64,
+			wafTemplateBruteForceFail CounterBasedGauge64,
+			wafTemplateChallengeCookieSent CounterBasedGauge64,
+			wafTemplateChallengeJavascriptSent CounterBasedGauge64,
+			wafTemplateChallengeCaptchaSent CounterBasedGauge64
+		}
+
+			wafTemplateName OBJECT-TYPE
+			SYNTAX  DisplayString 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "WAF Template Name" 
+			::={ wafTemplateSEntry 1 } 
+
+			wafTemplateTotalReq OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Total Requests" 
+			::={ wafTemplateSEntry 2 } 
+
+			wafTemplateReqAllowed OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Requests Allowed" 
+			::={ wafTemplateSEntry 3 } 
+
+			wafTemplateReqDenied OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Requests Denied" 
+			::={ wafTemplateSEntry 4 } 
+
+			wafTemplateBotCheckSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Botnet Check Success" 
+			::={ wafTemplateSEntry 5 } 
+
+			wafTemplateBotCheckFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Botnet Check Failure" 
+			::={ wafTemplateSEntry 6 } 
+
+			wafTemplateFormConsistencySucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Form Consistency Success" 
+			::={ wafTemplateSEntry 7 } 
+
+			wafTemplateFormConsistencyFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Form Consistency Failure" 
+			::={ wafTemplateSEntry 8 } 
+
+			wafTemplateFormCsrfTagSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Form CSRF tag Success" 
+			::={ wafTemplateSEntry 9 } 
+
+			wafTemplateFormCsrfTagFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Form CSRF tag Failure" 
+			::={ wafTemplateSEntry 10 } 
+
+			wafTemplateUrlCheckSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "URL Check Success" 
+			::={ wafTemplateSEntry 11 } 
+
+			wafTemplateUrlCheckFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "URL Check Failure" 
+			::={ wafTemplateSEntry 12 } 
+
+			wafTemplateUrlCheckLearn OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "URL Check Learn" 
+			::={ wafTemplateSEntry 13 } 
+
+			wafTemplateBufOvfUrlLenFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Buffer Overflow - URL Length Failure" 
+			::={ wafTemplateSEntry 14 } 
+
+			wafTemplateBufOvfCookieLenFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Buffer Overflow - Cookie Length Failure" 
+			::={ wafTemplateSEntry 15 } 
+
+			wafTemplateBufOvfHdrsLenFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Buffer Overflow - Headers length Failure" 
+			::={ wafTemplateSEntry 16 } 
+
+			wafTemplateBufOvfPostSizeFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Buffer Overflow - Post size Failure" 
+			::={ wafTemplateSEntry 17 } 
+
+			wafTemplateMaxCookiesFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Max Cookies Failure" 
+			::={ wafTemplateSEntry 18 } 
+
+			wafTemplateMaxHdrsFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Max Headers Failure" 
+			::={ wafTemplateSEntry 19 } 
+
+			wafTemplateHttpMethodCheckSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Http Method Check Success" 
+			::={ wafTemplateSEntry 20 } 
+
+			wafTemplateHttpMethodCheckFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Http Method Check Failure" 
+			::={ wafTemplateSEntry 21 } 
+
+			wafTemplateHttpCheckSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Http Check Success" 
+			::={ wafTemplateSEntry 22 } 
+
+			wafTemplateHttpCheckFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Http Check Failure" 
+			::={ wafTemplateSEntry 23 } 
+
+			wafTemplateRefererCheckSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Referer Check Success" 
+			::={ wafTemplateSEntry 24 } 
+
+			wafTemplateRefererCheckFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Referer Check Failure" 
+			::={ wafTemplateSEntry 25 } 
+
+			wafTemplateRefererCheckRedirect OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Referer Check Redirect" 
+			::={ wafTemplateSEntry 26 } 
+
+			wafTemplateUriWlistSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "URI White List Success" 
+			::={ wafTemplateSEntry 27 } 
+
+			wafTemplateUriWlistFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "URI White List Failure" 
+			::={ wafTemplateSEntry 28 } 
+
+			wafTemplateUriBlistSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "URI Black List Success" 
+			::={ wafTemplateSEntry 29 } 
+
+			wafTemplateUriBlistFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "URI Black List Failure" 
+			::={ wafTemplateSEntry 30 } 
+
+			wafTemplatePostFormCheckSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Post Form Check Success" 
+			::={ wafTemplateSEntry 31 } 
+
+			wafTemplatePostFormCheckSanitize OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Post Form Check Sanitized" 
+			::={ wafTemplateSEntry 32 } 
+
+			wafTemplatePostFromCheckReject OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Post Form Check Rejected" 
+			::={ wafTemplateSEntry 33 } 
+
+			wafTemplateCcnMaskAmex OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Credit Card Number Mask Amex" 
+			::={ wafTemplateSEntry 34 } 
+
+			wafTemplateCcnMaskDiners OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Credit Card Number Mask Diners" 
+			::={ wafTemplateSEntry 35 } 
+
+			wafTemplateCcnMaskVisa OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Credit Card Number Mask Visa" 
+			::={ wafTemplateSEntry 36 } 
+
+			wafTemplateCcnMaskMastercard OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Credit Card Number Mask Mastercard" 
+			::={ wafTemplateSEntry 37 } 
+
+			wafTemplateCcnMaskDiscover OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Credit Card Number Mask Discover" 
+			::={ wafTemplateSEntry 38 } 
+
+			wafTemplateHttpCcnMaskJob OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Credit Card Number Mask Jcb" 
+			::={ wafTemplateSEntry 39 } 
+
+			wafTemplateSsnMask OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Social Security Number Mask" 
+			::={ wafTemplateSEntry 40 } 
+
+			wafTemplatePcreMask OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "PCRE Mask" 
+			::={ wafTemplateSEntry 41 } 
+
+			wafTemplateCookieEncryptSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Cookie Encrypt Success" 
+			::={ wafTemplateSEntry 42 } 
+
+			wafTemplateCookieEncryptFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Cookie Encrypt Failure" 
+			::={ wafTemplateSEntry 43 } 
+
+			wafTemplateCookieEncryptLimitExceeded OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Cookie Encrypt Limit Exceeded" 
+			::={ wafTemplateSEntry 44 } 
+
+			wafTemplateCookieEncryptSkipRcache OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Cookie Encrypt Skip RCache" 
+			::={ wafTemplateSEntry 45 } 
+
+			wafTemplateCookieDecryptSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Cookie Decrypt Success" 
+			::={ wafTemplateSEntry 46 } 
+
+			wafTemplateCookieDecryptFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Cookie Decrypt Failure" 
+			::={ wafTemplateSEntry 47 } 
+
+			wafTemplateSqliaChkUrlSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "SQLIA Check URL Success" 
+			::={ wafTemplateSEntry 48 } 
+
+			wafTemplateSqliaChkUrlSanitize OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "SQLIA Check URL Sanitized" 
+			::={ wafTemplateSEntry 49 } 
+
+			wafTemplateSqliaChkUrlReject OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "SQLIA Check URL Rejected" 
+			::={ wafTemplateSEntry 50 } 
+
+			wafTemplateSqliaChkPostSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "SQLIA Check Post Success" 
+			::={ wafTemplateSEntry 51 } 
+
+			wafTemplateSqliaChkPostSanitize OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "SQLIA Check Post Sanitized" 
+			::={ wafTemplateSEntry 52 } 
+
+			wafTemplateSqliaChkPostReject OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "SQLIA Check Post Rejected" 
+			::={ wafTemplateSEntry 53 } 
+
+			wafTemplateXssChkCookieSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XSS Check Cookie Success" 
+			::={ wafTemplateSEntry 54 } 
+
+			wafTemplateXssChkCookieSanitize OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XSS Check Cookie Sanitized" 
+			::={ wafTemplateSEntry 55 } 
+
+			wafTemplateXssChkCookieReject OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XSS Check Cookie Rejected" 
+			::={ wafTemplateSEntry 56 } 
+
+			wafTemplateXssChkUrlSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XSS Check URL Success" 
+			::={ wafTemplateSEntry 57 } 
+
+			wafTemplateXssChkUrlSanitize OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XSS Check URL Sanitized" 
+			::={ wafTemplateSEntry 58 } 
+
+			wafTemplateXssChkUrlReject OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XSS Check URL Rejected" 
+			::={ wafTemplateSEntry 59 } 
+
+			wafTemplateChkPostSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XSS Check Post Success" 
+			::={ wafTemplateSEntry 60 } 
+
+			wafTemplateXssChkPostSanitize OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XSS Check Post Sanitized" 
+			::={ wafTemplateSEntry 61 } 
+
+			wafTemplateXssChkPostReject OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XSS Check Post Rejected" 
+			::={ wafTemplateSEntry 62 } 
+
+			wafTemplateRespCodeHidden OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Response Code Hidden" 
+			::={ wafTemplateSEntry 63 } 
+
+			wafTemplateRespHdrsFiltered OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Response Headers Filtered" 
+			::={ wafTemplateSEntry 64 } 
+
+			wafTemplateLearnUpdates OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Learning Updates" 
+			::={ wafTemplateSEntry 65 } 
+
+			wafTemplateNumDrops OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Number Drops" 
+			::={ wafTemplateSEntry 66 } 
+
+			wafTemplateNumResets OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Number Resets" 
+			::={ wafTemplateSEntry 67 } 
+
+			wafTemplateFormNonSslReject OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Form Non SSL Rejected" 
+			::={ wafTemplateSEntry 68 } 
+
+			wafTemplateFromNonPostReject OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Form Non Post Rejected" 
+			::={ wafTemplateSEntry 69 } 
+
+			wafTemplateSessCheckNone OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Session Check None" 
+			::={ wafTemplateSEntry 70 } 
+
+			wafTemplateSessCheckSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Session Check Success" 
+			::={ wafTemplateSEntry 71 } 
+
+			wafTemplateSessCheckFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Session Check Failure" 
+			::={ wafTemplateSEntry 72 } 
+
+			wafTemplateSoapCheckSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Soap Check Success" 
+			::={ wafTemplateSEntry 73 } 
+
+			wafTemplateSoapCheckFailure OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Soap Check Failure" 
+			::={ wafTemplateSEntry 74 } 
+
+			wafTemplateWsdlFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "WSDL Failure" 
+			::={ wafTemplateSEntry 75 } 
+
+			wafTemplateWsdlSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "WSDL Success" 
+			::={ wafTemplateSEntry 76 } 
+
+			wafTemplateXmlSchemaFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Schema Failure" 
+			::={ wafTemplateSEntry 77 } 
+
+			wafTemplateXmlSchemaSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Schema Success" 
+			::={ wafTemplateSEntry 78 } 
+
+			wafTemplateXmlSqliaChkFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Sqlia Check Failure" 
+			::={ wafTemplateSEntry 79 } 
+
+			wafTemplateXmlSqliaChkSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Sqlia Check Success" 
+			::={ wafTemplateSEntry 80 } 
+
+			wafTemplateXmlXssChkFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML XSS Check Failure" 
+			::={ wafTemplateSEntry 81 } 
+
+			wafTemplateXmlXssChkSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML XSS Check Success" 
+			::={ wafTemplateSEntry 82 } 
+
+			wafTemplateJsonChekFailure OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "JSON Check Failure" 
+			::={ wafTemplateSEntry 83 } 
+
+			wafTemplateJsonCheckSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "JSON Check Success" 
+			::={ wafTemplateSEntry 84 } 
+
+			wafTemplateXmlCheckFailure OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Check Failure" 
+			::={ wafTemplateSEntry 85 } 
+
+			wafTemplateXmlCheckSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Check Success" 
+			::={ wafTemplateSEntry 86 } 
+
+			wafTemplateBufOvfCookieValueLenFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Buffer Overflow - Cookie Value Length Failure" 
+			::={ wafTemplateSEntry 87 } 
+
+			wafTemplateBufOvfCookiesLenFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Buffer Overflow - Cookies Length Failure" 
+			::={ wafTemplateSEntry 88 } 
+
+			wafTemplateBufOvfHdrNameLenFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Buffer Overflow - Header Name Length Failure" 
+			::={ wafTemplateSEntry 89 } 
+
+			wafTemplateBufOvfHdrValueLenFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Buffer Overflow - Header Value Length Failure" 
+			::={ wafTemplateSEntry 90 } 
+
+			wafTemplateBufOvfMaxDataParseFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Buffer Overflow - Max Data Parse Failure" 
+			::={ wafTemplateSEntry 91 } 
+
+			wafTemplateBufOvfLineLenFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Buffer Overflow - Line Length Failure" 
+			::={ wafTemplateSEntry 92 } 
+
+			wafTemplateBufOvfParameterNameLenFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Buffer Overflow - HTML Parameter Name Length Failure" 
+			::={ wafTemplateSEntry 93 } 
+
+			wafTemplateBufOvfParameterValueLenFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Buffer Overflow - HTML Parameter Value Length Failure" 
+			::={ wafTemplateSEntry 94 } 
+
+			wafTemplateBufOvfParameterTotalLenFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Buffer Overflow - HTML Parameter Total Length Failure" 
+			::={ wafTemplateSEntry 95 } 
+
+			wafTemplateBufOvfQueryLenFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Buffer Overflow - Query Length Failure" 
+			::={ wafTemplateSEntry 96 } 
+
+			wafTemplateMaxEntitiesFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Max Entities Failure" 
+			::={ wafTemplateSEntry 97 } 
+
+			wafTemplateMaxParametersFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Max Parameters Failure" 
+			::={ wafTemplateSEntry 98 } 
+
+			wafTemplateBufOvfCookieNameLenFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Buffer Overflow - Cookie Name Length Failure" 
+			::={ wafTemplateSEntry 99 } 
+
+			wafTemplateXmlLimitAttr OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Limit Attribue" 
+			::={ wafTemplateSEntry 100 } 
+
+			wafTemplateXmlLimitAttrNameLen OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Limit Name Length" 
+			::={ wafTemplateSEntry 101 } 
+
+			wafTemplateXmlLimitAttrValueLen OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Limit Value Length" 
+			::={ wafTemplateSEntry 102 } 
+
+			wafTemplateXmlLimitCdataLen OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Limit CData Length" 
+			::={ wafTemplateSEntry 103 } 
+
+			wafTemplateXmlLimitElem OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Limit Element" 
+			::={ wafTemplateSEntry 104 } 
+
+			wafTemplateXmlLimitElemChild OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Limit Element Child" 
+			::={ wafTemplateSEntry 105 } 
+
+			wafTemplateXmlLimitElemDepth OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Limit Element Depth" 
+			::={ wafTemplateSEntry 106 } 
+
+			wafTemplateXmlLimitElemNameLen OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Limit Element Name Length" 
+			::={ wafTemplateSEntry 107 } 
+
+			wafTemplateXmlLimitEntityExp OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Limit Entity Exp" 
+			::={ wafTemplateSEntry 108 } 
+
+			wafTemplateXmlLimitEntityExpDepth OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Limit Entity Exp Depth" 
+			::={ wafTemplateSEntry 109 } 
+
+			wafTemplateXmlLimitNamespace OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Limit Namespace" 
+			::={ wafTemplateSEntry 110 } 
+
+			wafTemplateXmlLimitNamespaceUriLen OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "XML Limit Namespace URI Length" 
+			::={ wafTemplateSEntry 111 } 
+
+			wafTemplateJsonLimitArrayValueCount OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "JSON Limit Array Value Count" 
+			::={ wafTemplateSEntry 112 } 
+
+			wafTemplateJsonLimitDepth OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "JSON Limit Depth" 
+			::={ wafTemplateSEntry 113 } 
+
+			wafTemplateJsonLimitObjectMemberCount OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "JSON Limit Object Number Count" 
+			::={ wafTemplateSEntry 114 } 
+
+			wafTemplateJsonLimitString OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "JSON Limit String" 
+			::={ wafTemplateSEntry 115 } 
+
+			wafTemplateFormNonMaskedPassword OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Form Non Masked Password" 
+			::={ wafTemplateSEntry 116 } 
+
+			wafTemplateFormNonSslPassword OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Form Non SSL Password" 
+			::={ wafTemplateSEntry 117 } 
+
+			wafTemplateFormPasswordAutocomplete OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Form Password Autocomplete" 
+			::={ wafTemplateSEntry 118 } 
+
+			wafTemplateRedirectWlistSucc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Redirect Whitelist Success" 
+			::={ wafTemplateSEntry 119 } 
+
+			wafTemplateRedirectWlistFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Redirect Whitelist Failure" 
+			::={ wafTemplateSEntry 120 } 
+
+			wafTemplateRedirectWlistLearn OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Redirect Whitelist Learn" 
+			::={ wafTemplateSEntry 121 } 
+
+			wafTemplateFormSetNoCache OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Form Set No Cache" 
+			::={ wafTemplateSEntry 122 } 
+
+			wafTemplateRespDenied OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Responses Denied" 
+			::={ wafTemplateSEntry 123 } 
+
+			wafTemplateSessionsAlloc OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Sessions allocated" 
+			::={ wafTemplateSEntry 124 } 
+
+			wafTemplateSessionsFreed OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Sessions freed" 
+			::={ wafTemplateSEntry 125 } 
+
+			wafTemplateOutOfSessions OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Out of sessions" 
+			::={ wafTemplateSEntry 126 } 
+
+			wafTemplateTooManySessions OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Too many sessions consumed" 
+			::={ wafTemplateSEntry 127 } 
+
+			wafTemplateCalled OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Threshold check count" 
+			::={ wafTemplateSEntry 128 } 
+
+			wafTemplatePermitted OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Honor threshold  count" 
+			::={ wafTemplateSEntry 129 } 
+
+			wafTemplateBruteForceSuccess OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Brute-force checks passed" 
+			::={ wafTemplateSEntry 130 } 
+
+			wafTemplateBruteForceFail OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Brute-force checks failed" 
+			::={ wafTemplateSEntry 131 } 
+
+			wafTemplateChallengeCookieSent OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Cookie challenge sent" 
+			::={ wafTemplateSEntry 132 } 
+
+			wafTemplateChallengeJavascriptSent OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "JavaScript challenge sent" 
+			::={ wafTemplateSEntry 133 } 
+
+			wafTemplateChallengeCaptchaSent OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Captcha challenge sent" 
+			::={ wafTemplateSEntry 134 } 
+
+END
+

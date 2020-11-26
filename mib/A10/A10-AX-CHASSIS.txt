@@ -1,0 +1,187 @@
+--
+-- File Name : A10-TEMP.txt
+--
+-- Copyright(C) 2005-2011, A10 Networks Inc. All rights reserved.
+-- Software for all A10 products contain trade secrets and confidential
+-- information of A10 Networks and its subsidiaries and may not be disclosed,
+-- copied, reproduced or distributed to anyone outside of A10 Networks
+-- without prior written consent of A10 Networks, Inc.
+--
+-- Description:     This is the A10 AX mib file.
+--
+-- History:
+--
+--
+--
+
+A10-AX-CHASSIS DEFINITIONS ::= BEGIN
+--================================================================
+-- A10-TEMP
+--	Management MIB for A10 application acceleration appliance
+--================================================================
+  IMPORTS
+
+    DisplayString, PhysAddress
+      FROM SNMPv2-TC
+
+    InetAddressType
+      FROM INET-ADDRESS-MIB
+
+    CounterBasedGauge64
+      FROM HCNUM-TC
+
+    axChassis
+      FROM A10-AX-MIB
+
+    MODULE-IDENTITY, OBJECT-TYPE, Counter32, Integer32, Counter64, OBJECT-IDENTITY, NOTIFICATION-TYPE
+      FROM SNMPv2-SMI;
+
+    axChassisMgmt MODULE-IDENTITY
+		LAST-UPDATED	"200705071327Z"
+		ORGANIZATION	"A10 Networks, Inc."
+		CONTACT-INFO	"Address: A10 Networks, Inc.
+					  2309 Bering Drive
+					  San Jose, CA 95131
+				 Phone:   +1-888-822-7210 (USA/Canada)
+				          +1-408-325-8676 (International)
+				 E-mail:  support@A10Networks.com" 
+
+		DESCRIPTION	"Management root OID for chassis platform"
+		::=  {  axChassis 1  }       
+		
+	
+   axChassisSystem  OBJECT IDENTIFIER ::=  {  axChassisMgmt  1  }
+
+   axChassisHardware  OBJECT IDENTIFIER ::= { axChassisSystem 1 }
+
+   axFanTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF AxFanEntry
+    MAX-ACCESS not-accessible
+    STATUS current
+    DESCRIPTION
+        "The table contains system fan status "
+    ::= { axChassisHardware 1 }
+
+    axFanEntry OBJECT-TYPE
+    SYNTAX  AxFanEntry
+    MAX-ACCESS not-accessible
+    STATUS current
+    DESCRIPTION
+        "Columns in the axFanTable"
+    INDEX {
+        axFanSlotId, axFanIndex
+    }
+    ::= { axFanTable 1 }
+
+    AxFanEntry ::=
+    SEQUENCE {
+	    axFanSlotId		     Integer32,
+            axFanIndex               Integer32,
+            axFanName                DisplayString,
+            axFanStatus              INTEGER,
+            axFanSpeed               Integer32
+    }
+
+    axFanSlotId OBJECT-TYPE
+    SYNTAX Integer32
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "The slot id in chassis, slot id start from 1 for master."
+    ::= { axFanEntry 1 }
+
+    axFanIndex OBJECT-TYPE
+    SYNTAX Integer32
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "The system fan index, index start from 1 which is the first fan."
+    ::= { axFanEntry 2 }
+ 
+    axFanName OBJECT-TYPE
+    SYNTAX DisplayString
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "The system fan name."
+    ::= { axFanEntry 3 }
+	
+    axFanStatus OBJECT-TYPE
+    SYNTAX INTEGER {
+        failed(0),
+        okFixedHigh(4),
+        okLowMed(5),
+        okMedMed(6),
+        okMedHigh(7),
+        notReady(-2),
+        unknown(-1)
+    }
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Fan status:
+           0: Failed, 4: OK-fixed/high, 5: OK-low/med, 6: OK-med/med, 7:
+OK-med/high,
+           -2: not ready, -1: unknown."
+    ::= { axFanEntry 4 }
+
+
+    axFanSpeed OBJECT-TYPE
+    SYNTAX Integer32
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "The fan speed."
+    ::= { axFanEntry 5 }
+
+   axChassisStats  OBJECT IDENTIFIER ::=  {  axChassisMgmt  2  }
+
+--axGlobalStats OBJECT IDENTIFIER ::=  { axChassisStats 1 }
+--axSlbStats    OBJECT IDENTIFIER ::=  { axChassisStats 2 }
+   axCgnv6Stats  OBJECT IDENTIFIER ::=  { axChassisStats 3 }
+
+   axCgnv6LsnStats  OBJECT IDENTIFIER ::= { axCgnv6Stats 1 } 
+   axCgnv6LsnUserQuotaSessionStats OBJECT IDENTIFIER ::=  { axCgnv6LsnStats 1 }
+
+   axLsnUserQuotaSessionTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF AxLsnUserQuotaSessionEntry
+    MAX-ACCESS not-accessible
+    STATUS current
+    DESCRIPTION
+        "The table contains cgnv6 lsn user quota session count"
+    ::= { axCgnv6LsnUserQuotaSessionStats 1 }
+
+    axLsnUserQuotaSessionEntry OBJECT-TYPE
+    SYNTAX  AxLsnUserQuotaSessionEntry
+    MAX-ACCESS not-accessible
+    STATUS current
+    DESCRIPTION
+        "Columns in the axLsnUserQuotaSessionTable"
+    INDEX {
+        axLsnUserQuotaSessionSlotId
+    }
+    ::= { axLsnUserQuotaSessionTable 1 }
+
+    AxLsnUserQuotaSessionEntry ::=
+    SEQUENCE {
+	    axLsnUserQuotaSessionSlotId    Integer32,
+        axLsnUserQuotaSessionCount     CounterBasedGauge64
+    }
+
+    axLsnUserQuotaSessionSlotId OBJECT-TYPE
+    SYNTAX Integer32
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "The slot-id of chassis ."
+    ::= { axLsnUserQuotaSessionEntry 1 }
+
+    axLsnUserQuotaSessionCount OBJECT-TYPE
+    SYNTAX CounterBasedGauge64
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "The total session of lsn user quota session."
+    ::= { axLsnUserQuotaSessionEntry 2 }
+
+END

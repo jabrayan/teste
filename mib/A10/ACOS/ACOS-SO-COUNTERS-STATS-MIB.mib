@@ -1,0 +1,196 @@
+ACOS-SO-COUNTERS-STATS-MIB DEFINITIONS ::= BEGIN
+	IMPORTS
+		DisplayString, PhysAddress
+		FROM SNMPv2-TC
+	InetAddressType
+		FROM INET-ADDRESS-MIB
+	acosRootStats
+		FROM A10-AX-MIB
+	MODULE-IDENTITY, OBJECT-TYPE, Counter32, Integer32, Counter64, OBJECT-IDENTITY, NOTIFICATION-TYPE
+		FROM SNMPv2-SMI;
+		acosSoCounters MODULE-IDENTITY
+				LAST-UPDATED	"200705071327Z"
+				ORGANIZATION	"A10 Networks, Inc."
+				CONTACT-INFO	"Address: A10 Networks, Inc.
+							  3 West Pumeria Dr.
+							  San Jose, CA 95131
+						 Phone:   +1-888-822-7210 (USA/Canada)
+						          +1-408-325-8676 (International)
+						 E-mail:  support@A10Networks.com"
+
+				DESCRIPTION	 "SoCounters OID for ACOS"
+				::=  {  acosRootStats 143  }
+
+acosSoCounters                      OBJECT IDENTIFIER ::= { acosRootStats 143 }
+acosSoCountersS                     OBJECT IDENTIFIER ::= { acosSoCounters 1 }
+
+		soPktsConnIn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total packets processed for an established connection" 
+		::={ acosSoCountersS 1 } 
+
+		soPktsConnRedirect OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total packets redirected for an established connection" 
+		::={ acosSoCountersS 2 } 
+
+		soPktsDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total packets dropped" 
+		::={ acosSoCountersS 3 } 
+
+		soPktsErrors OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total packet errors" 
+		::={ acosSoCountersS 4 } 
+
+		soPktsIn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total packets in-coming" 
+		::={ acosSoCountersS 5 } 
+
+		soPktsNewConnIn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total packets processed for a new connection" 
+		::={ acosSoCountersS 6 } 
+
+		soPktsNewConnRedirect OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total packets redirected for a new connection" 
+		::={ acosSoCountersS 7 } 
+
+		soPktsOut OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total packets sent out" 
+		::={ acosSoCountersS 8 } 
+
+		soPktsRedirect OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total packets redirected" 
+		::={ acosSoCountersS 9 } 
+
+		soPktsConnSyncFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total connection sync failures" 
+		::={ acosSoCountersS 10 } 
+
+		soPktsNatReserveFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total NAT reserve failures" 
+		::={ acosSoCountersS 11 } 
+
+		soPktsNatReleaseFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total NAT release failures" 
+		::={ acosSoCountersS 12 } 
+
+		soPktsConnL7Sync OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total L7 connection syncs" 
+		::={ acosSoCountersS 13 } 
+
+		soPktsConnL4Sync OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total L4 connection syncs" 
+		::={ acosSoCountersS 14 } 
+
+		soPktsConnNatSync OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total NAT connection syncs" 
+		::={ acosSoCountersS 15 } 
+
+		soPktsConnXparentFwSync OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Xparent FW connection syncs" 
+		::={ acosSoCountersS 16 } 
+
+		soPktsRedirectConnAgedOut OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total redirect conns aged out" 
+		::={ acosSoCountersS 17 } 
+
+		soPktsTrafficMapNotFoundDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Traffic MAP Not Found Drop" 
+		::={ acosSoCountersS 18 } 
+
+		soPktsScaleoutNotActiveDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Scaleout Not Active Drop" 
+		::={ acosSoCountersS 19 } 
+
+		soPktsDestMacMistmatchDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Destination MAC Mistmatch Drop" 
+		::={ acosSoCountersS 20 } 
+
+		soPktsL2redirectInterfaceNotUp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "L2redirect Intf is not UP" 
+		::={ acosSoCountersS 21 } 
+
+		soFwInternalRuleCount OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "FW internal rule count" 
+		::={ acosSoCountersS 22 } 
+
+		soPktsRedirectTableError OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Redirect Table Error" 
+		::={ acosSoCountersS 23 } 
+
+		soPktsMacZeroDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "MAC Address zero Drop" 
+		::={ acosSoCountersS 24 } 
+
+END
+

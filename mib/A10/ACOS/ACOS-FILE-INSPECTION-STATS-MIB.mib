@@ -1,0 +1,511 @@
+ACOS-FILE-INSPECTION-STATS-MIB DEFINITIONS ::= BEGIN
+	IMPORTS
+		DisplayString, PhysAddress
+		FROM SNMPv2-TC
+	InetAddressType
+		FROM INET-ADDRESS-MIB
+	acosRootStats
+		FROM A10-AX-MIB
+	MODULE-IDENTITY, OBJECT-TYPE, Counter32, Integer32, Counter64, OBJECT-IDENTITY, NOTIFICATION-TYPE
+		FROM SNMPv2-SMI;
+		acosFileInspection MODULE-IDENTITY
+				LAST-UPDATED	"200705071327Z"
+				ORGANIZATION	"A10 Networks, Inc."
+				CONTACT-INFO	"Address: A10 Networks, Inc.
+							  3 West Pumeria Dr.
+							  San Jose, CA 95131
+						 Phone:   +1-888-822-7210 (USA/Canada)
+						          +1-408-325-8676 (International)
+						 E-mail:  support@A10Networks.com"
+
+				DESCRIPTION	 "FileInspection OID for ACOS"
+				::=  {  acosRootStats 170  }
+
+acosFileInspectionGlobalStat        OBJECT IDENTIFIER ::= { acosFileInspection 4 }
+acosFileInspectionGlobalStatS       OBJECT IDENTIFIER ::= { acosFileInspectionGlobalStat 1 }
+
+		downloadBadBlocked OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Download malware blocked" 
+		::={ acosFileInspectionGlobalStatS 1 } 
+
+		downloadBadAllowed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Download malware allowed" 
+		::={ acosFileInspectionGlobalStatS 2 } 
+
+		downloadBadExtInspect OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Download malware extrnal inspect" 
+		::={ acosFileInspectionGlobalStatS 3 } 
+
+		downloadSuspectBlocked OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Download suspect blocked" 
+		::={ acosFileInspectionGlobalStatS 4 } 
+
+		downloadSuspectExtInspect OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Download suspect extrnal inspect" 
+		::={ acosFileInspectionGlobalStatS 5 } 
+
+		downloadSuspectAllowed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Download suspect allowed" 
+		::={ acosFileInspectionGlobalStatS 6 } 
+
+		downloadGoodBlocked OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Download safe blocked" 
+		::={ acosFileInspectionGlobalStatS 7 } 
+
+		downloadGoodAllowed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Download safe external inspect" 
+		::={ acosFileInspectionGlobalStatS 8 } 
+
+		downloadGoodExtInspect OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Download safe allowed" 
+		::={ acosFileInspectionGlobalStatS 9 } 
+
+		uploadBadBlocked OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Upload malware blocked" 
+		::={ acosFileInspectionGlobalStatS 10 } 
+
+		uploadBadAllowed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Upload malware allowed" 
+		::={ acosFileInspectionGlobalStatS 11 } 
+
+		uploadBadExtInspect OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Upload malware extrnal inspect" 
+		::={ acosFileInspectionGlobalStatS 12 } 
+
+		uploadSuspectBlocked OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Upload suspect blocked" 
+		::={ acosFileInspectionGlobalStatS 13 } 
+
+		uploadSuspectExtInspect OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Upload suspect extrnal inspect" 
+		::={ acosFileInspectionGlobalStatS 14 } 
+
+		uploadSuspectAllowed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Upload suspect allowed" 
+		::={ acosFileInspectionGlobalStatS 15 } 
+
+		uploadGoodBlocked OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Upload safe blocked" 
+		::={ acosFileInspectionGlobalStatS 16 } 
+
+		uploadGoodExtInspect OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Upload safe external inspect" 
+		::={ acosFileInspectionGlobalStatS 17 } 
+
+		uploadGoodAllowed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Upload safe allowed" 
+		::={ acosFileInspectionGlobalStatS 18 } 
+
+		icap200 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Receive icap status 200" 
+		::={ acosFileInspectionGlobalStatS 19 } 
+
+		icap204 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Receive icap status 204" 
+		::={ acosFileInspectionGlobalStatS 20 } 
+
+		icap500 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Receive icap status 500" 
+		::={ acosFileInspectionGlobalStatS 21 } 
+
+		icapOtherStatusCode OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Receive icap other status code" 
+		::={ acosFileInspectionGlobalStatS 22 } 
+
+		icapConnectFail OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Icap connect fail" 
+		::={ acosFileInspectionGlobalStatS 23 } 
+
+		icapConnectionCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Icap connection created" 
+		::={ acosFileInspectionGlobalStatS 24 } 
+
+		icapConnectionEstablished OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Icap connection established" 
+		::={ acosFileInspectionGlobalStatS 25 } 
+
+		icapConnectionClosed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Icap connection closed" 
+		::={ acosFileInspectionGlobalStatS 26 } 
+
+		icapConnectionRst OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Icap connection rst" 
+		::={ acosFileInspectionGlobalStatS 27 } 
+
+		icapBytesSent OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Icap bytes sent" 
+		::={ acosFileInspectionGlobalStatS 28 } 
+
+		icapBytesReceived OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Icap bytes received" 
+		::={ acosFileInspectionGlobalStatS 29 } 
+
+		bypassAflex OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Bypassed by aflex" 
+		::={ acosFileInspectionGlobalStatS 30 } 
+
+		bypassLargeFile OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Bypassed - large file size" 
+		::={ acosFileInspectionGlobalStatS 31 } 
+
+		bypassServiceDisabled OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Bypassed - Internal service disabled" 
+		::={ acosFileInspectionGlobalStatS 32 } 
+
+		bypassServiceDown OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Bypassed - Internal service down" 
+		::={ acosFileInspectionGlobalStatS 33 } 
+
+		resetServiceDown OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reset - Internal service down" 
+		::={ acosFileInspectionGlobalStatS 34 } 
+
+		bypassMaxConcurrentFilesReached OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Bypassed - max concurrent files on server reached" 
+		::={ acosFileInspectionGlobalStatS 35 } 
+
+		bypassNonInspection OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Bypassed non inspection data" 
+		::={ acosFileInspectionGlobalStatS 36 } 
+
+		nonSupportedFile OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Non supported file type" 
+		::={ acosFileInspectionGlobalStatS 37 } 
+
+		transactionsAlloc OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total transactions allocated" 
+		::={ acosFileInspectionGlobalStatS 38 } 
+
+		transactionsFree OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total transactions freed" 
+		::={ acosFileInspectionGlobalStatS 39 } 
+
+		transactionsFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total transactions failure" 
+		::={ acosFileInspectionGlobalStatS 40 } 
+
+		transactionsAborted OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total transactions aborted" 
+		::={ acosFileInspectionGlobalStatS 41 } 
+
+		origConnBytesReceived OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Original connection bytes received" 
+		::={ acosFileInspectionGlobalStatS 42 } 
+
+		origConnBytesSent OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Original connection bytes sent" 
+		::={ acosFileInspectionGlobalStatS 43 } 
+
+		origConnBytesBypassed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Original connection bytes bypassed" 
+		::={ acosFileInspectionGlobalStatS 44 } 
+
+		bypassBufferedOverlimit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Bytes Buffered Overlimit" 
+		::={ acosFileInspectionGlobalStatS 45 } 
+
+		totalBandwidth OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total File Bytes" 
+		::={ acosFileInspectionGlobalStatS 46 } 
+
+		totalSuspectBandwidth OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Suspected Files Bytes" 
+		::={ acosFileInspectionGlobalStatS 47 } 
+
+		totalBadBandwidth OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Bad Files Bytes" 
+		::={ acosFileInspectionGlobalStatS 48 } 
+
+		totalGoodBandwidth OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Good Files Bytes" 
+		::={ acosFileInspectionGlobalStatS 49 } 
+
+		totalFileSizeLess1m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Files Less than 1Mb" 
+		::={ acosFileInspectionGlobalStatS 50 } 
+
+		totalFileSize15m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Files Between 1-5Mb" 
+		::={ acosFileInspectionGlobalStatS 51 } 
+
+		totalFileSize58m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Files Between 5-8Mb" 
+		::={ acosFileInspectionGlobalStatS 52 } 
+
+		totalFileSize832m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Files Between 8-32Mb" 
+		::={ acosFileInspectionGlobalStatS 53 } 
+
+		totalFileSizeOver32m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Files over 32Mb" 
+		::={ acosFileInspectionGlobalStatS 54 } 
+
+		suspectFileSizeLess1m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Suspect Files Less than 1Mb" 
+		::={ acosFileInspectionGlobalStatS 55 } 
+
+		suspectFileSize15m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Suspect Files Between 1-5Mb" 
+		::={ acosFileInspectionGlobalStatS 56 } 
+
+		suspectFileSize58m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Suspect Files Between 5-8Mb" 
+		::={ acosFileInspectionGlobalStatS 57 } 
+
+		suspectFileSize832m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Suspect Files Between 8-32Mb" 
+		::={ acosFileInspectionGlobalStatS 58 } 
+
+		suspectFileSizeOver32m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Suspect Files over 32Mb" 
+		::={ acosFileInspectionGlobalStatS 59 } 
+
+		goodFileSizeLess1m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Good Files Less than 1Mb" 
+		::={ acosFileInspectionGlobalStatS 60 } 
+
+		goodFileSize15m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Good Files Between 1-5Mb" 
+		::={ acosFileInspectionGlobalStatS 61 } 
+
+		goodFileSize58m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Good Files Between 5-8Mb" 
+		::={ acosFileInspectionGlobalStatS 62 } 
+
+		goodFileSize832m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Good Files Between 8-32Mb" 
+		::={ acosFileInspectionGlobalStatS 63 } 
+
+		goodFileSizeOver32m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Good Files over 32Mb" 
+		::={ acosFileInspectionGlobalStatS 64 } 
+
+		badFileSizeLess1m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Bad Files Less than 1Mb" 
+		::={ acosFileInspectionGlobalStatS 65 } 
+
+		badFileSize15m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Bad Files Between 1-5Mb" 
+		::={ acosFileInspectionGlobalStatS 66 } 
+
+		badFileSize58m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Bad Files Between 5-8Mb" 
+		::={ acosFileInspectionGlobalStatS 67 } 
+
+		badFileSize832m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Bad Files Between 8-32Mb" 
+		::={ acosFileInspectionGlobalStatS 68 } 
+
+		badFileSizeOver32m OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Bad Files over 32Mb" 
+		::={ acosFileInspectionGlobalStatS 69 } 
+
+END
+

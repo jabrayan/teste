@@ -1,0 +1,2715 @@
+ACOS-FW-STATS-MIB DEFINITIONS ::= BEGIN
+	IMPORTS
+		DisplayString, PhysAddress
+		FROM SNMPv2-TC
+	InetAddressType
+		FROM INET-ADDRESS-MIB
+	acosRootStats
+		FROM A10-AX-MIB
+	MODULE-IDENTITY, OBJECT-TYPE, Counter32, Integer32, Counter64, OBJECT-IDENTITY, NOTIFICATION-TYPE
+		FROM SNMPv2-SMI;
+		acosFw MODULE-IDENTITY
+				LAST-UPDATED	"200705071327Z"
+				ORGANIZATION	"A10 Networks, Inc."
+				CONTACT-INFO	"Address: A10 Networks, Inc.
+							  3 West Pumeria Dr.
+							  San Jose, CA 95131
+						 Phone:   +1-888-822-7210 (USA/Canada)
+						          +1-408-325-8676 (International)
+						 E-mail:  support@A10Networks.com"
+
+				DESCRIPTION	 "Fw OID for ACOS"
+				::=  {  acosRootStats 139  }
+
+acosFwApp                           OBJECT IDENTIFIER ::= { acosFw 23 }
+acosFwAppS                          OBJECT IDENTIFIER ::= { acosFwApp 1 }
+
+		dummy OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Entry for a10countergen" 
+		::={ acosFwAppS 1 } 
+
+acosFwGtp                           OBJECT IDENTIFIER ::= { acosFw 25 }
+acosFwGtpS                          OBJECT IDENTIFIER ::= { acosFwGtp 1 }
+
+		createSessionRequest OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Create Session Request" 
+		::={ acosFwGtpS 1 } 
+
+		createSessionResponse OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Create Session Response" 
+		::={ acosFwGtpS 2 } 
+
+		pathManagementMessage OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Path Management Message" 
+		::={ acosFwGtpS 3 } 
+
+		deleteSessionRequest OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Delete Session Request" 
+		::={ acosFwGtpS 4 } 
+
+		deleteSessionResponse OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Delete Session Response" 
+		::={ acosFwGtpS 5 } 
+
+		reservedFieldSetDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reserved field set drop" 
+		::={ acosFwGtpS 6 } 
+
+		tunnelIdFlagDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Tunnel ID Flag Incorrect" 
+		::={ acosFwGtpS 7 } 
+
+		messageFilteringDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Message Filtering Drop" 
+		::={ acosFwGtpS 8 } 
+
+		reservedInformationElementDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Resevered Information Element Field Drop" 
+		::={ acosFwGtpS 9 } 
+
+		mandatoryInformationElementDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Mandatory Information Element Field Drop" 
+		::={ acosFwGtpS 10 } 
+
+		filterListDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "APN IMSI Information Filtering Drop" 
+		::={ acosFwGtpS 11 } 
+
+		invalidTeidDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Invalid TEID Drop" 
+		::={ acosFwGtpS 12 } 
+
+		outOfStateDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out Of State Drop" 
+		::={ acosFwGtpS 13 } 
+
+		messageLengthDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Message Length Exceeded" 
+		::={ acosFwGtpS 14 } 
+
+		unsupportedMessageTypeV2 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v2 message type is not supported" 
+		::={ acosFwGtpS 15 } 
+
+		fastConnSetup OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Fast Conn Setup Attempt" 
+		::={ acosFwGtpS 16 } 
+
+		outOfSessionMemory OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out of Session Memory" 
+		::={ acosFwGtpS 17 } 
+
+		gtpNoFwdRoute OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "No Forward Route" 
+		::={ acosFwGtpS 18 } 
+
+		gtpNoRevRoute OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "NO Reverse Route" 
+		::={ acosFwGtpS 19 } 
+
+		gtpInvalidKey OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Invalid TEID Field" 
+		::={ acosFwGtpS 20 } 
+
+		createSessionRequestRetransmit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Retransmitted Create Session Request" 
+		::={ acosFwGtpS 21 } 
+
+		deleteSessionRequestRetransmit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Retransmitted Delete Session Request" 
+		::={ acosFwGtpS 22 } 
+
+		responseCauseNotAccepted OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Response Cause indicates Request not Accepted" 
+		::={ acosFwGtpS 23 } 
+
+		invalidImsiLenDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Invalid IMSI Length Drop" 
+		::={ acosFwGtpS 24 } 
+
+		invalidApnLenDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Invalid APN Length Drop" 
+		::={ acosFwGtpS 25 } 
+
+		createPdpContextRequestV1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v1 Create PDP Context Request" 
+		::={ acosFwGtpS 26 } 
+
+		createPdpContextResponseV1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v1 Create PDP Context Response" 
+		::={ acosFwGtpS 27 } 
+
+		pathManagementMessageV1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v1 Path Management Message" 
+		::={ acosFwGtpS 28 } 
+
+		reservedFieldSetDropV1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v1 Reserved field set drop" 
+		::={ acosFwGtpS 29 } 
+
+		messageFilteringDropV1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v1 Message Filtering Drop" 
+		::={ acosFwGtpS 30 } 
+
+		reservedInformationElementDropV1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v1 Reserved Information Element Field Drop" 
+		::={ acosFwGtpS 31 } 
+
+		mandatoryInformationElementDropV1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v1 Mandatory Information Element Field Drop" 
+		::={ acosFwGtpS 32 } 
+
+		filterListDropV1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v1 APN IMSI Information Filtering Drop" 
+		::={ acosFwGtpS 33 } 
+
+		invalidTeidDropV1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v1 Invalid TEID Drop" 
+		::={ acosFwGtpS 34 } 
+
+		messageLengthDropV1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v1 Message Length Exceeded" 
+		::={ acosFwGtpS 35 } 
+
+		versionNotSupported OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP version is not supported" 
+		::={ acosFwGtpS 36 } 
+
+		unsupportedMessageTypeV1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v1 message type is not supported" 
+		::={ acosFwGtpS 37 } 
+
+		deletePdpContextRequestV1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v1 Delete Context PDP Request" 
+		::={ acosFwGtpS 38 } 
+
+		deletePdpContextResponseV1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v1 Delete Context PDP Response" 
+		::={ acosFwGtpS 39 } 
+
+		createPdpContextRequestV0 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v0 Create PDP Context Request" 
+		::={ acosFwGtpS 40 } 
+
+		createPdpContextResponseV0 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v0 Create PDP Context Response" 
+		::={ acosFwGtpS 41 } 
+
+		deletePdpContextRequestV0 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v0 Delete Context PDP Request" 
+		::={ acosFwGtpS 42 } 
+
+		deletePdpContextResponseV0 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v0 Delete Context PDP Response" 
+		::={ acosFwGtpS 43 } 
+
+		pathManagementMessageV0 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v0 Path Management Message" 
+		::={ acosFwGtpS 44 } 
+
+		messageFilteringDropV0 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v0 Message Filtering Drop" 
+		::={ acosFwGtpS 45 } 
+
+		unsupportedMessageTypeV0 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v0 message type is not supported" 
+		::={ acosFwGtpS 46 } 
+
+		invalidFlowLabelDropV0 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v0 Invalid flow label drop" 
+		::={ acosFwGtpS 47 } 
+
+		invalidTidDropV0 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v0 Invalid tid drop" 
+		::={ acosFwGtpS 48 } 
+
+		messageLengthDropV0 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v0 Message Length Exceeded" 
+		::={ acosFwGtpS 49 } 
+
+		mandatoryInformationElementDropV0 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v0 Mandatory Information Element Field Drop" 
+		::={ acosFwGtpS 50 } 
+
+		filterListDropV0 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP v0 APN IMSI Information Filtering Drop" 
+		::={ acosFwGtpS 51 } 
+
+		gtpInGtpDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GTP in GTP Filtering Drop" 
+		::={ acosFwGtpS 52 } 
+
+acosFwServer                        OBJECT IDENTIFIER ::= { acosFw 3 }
+acosFwServerS                       OBJECT IDENTIFIER ::= { acosFwServer 1 }
+
+fwServerSTable OBJECT-TYPE
+		SYNTAX SEQUENCE OF FwServerSEntry
+		MAX-ACCESS not-accessible
+		STATUS current
+		::={ acosFwServerS 1 } 
+
+
+	fwServerSEntry OBJECT-TYPE
+		SYNTAX FwServerSEntry
+		MAX-ACCESS not-accessible
+		STATUS current
+		INDEX {
+			fwName
+		}
+		::={ fwServerSTable 1 } 
+
+
+	FwServerSEntry ::=
+		SEQUENCE {
+			fwName DisplayString, 
+			fwServerCurrConn CounterBasedGauge64,
+			totalConn CounterBasedGauge64,
+			fwdPkt CounterBasedGauge64,
+			revPkt CounterBasedGauge64,
+			peakConn CounterBasedGauge64
+		}
+
+			fwName OBJECT-TYPE
+			SYNTAX  DisplayString 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Server Name" 
+			::={ fwServerSEntry 1 } 
+
+			fwServerCurrConn OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Current connections" 
+			::={ fwServerSEntry 2 } 
+
+			totalConn OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Total connections" 
+			::={ fwServerSEntry 3 } 
+
+			fwdPkt OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Forward packets" 
+			::={ fwServerSEntry 4 } 
+
+			revPkt OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Reverse Packets" 
+			::={ fwServerSEntry 5 } 
+
+			peakConn OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Peak connections" 
+			::={ fwServerSEntry 6 } 
+
+acosFwServiceGroup                  OBJECT IDENTIFIER ::= { acosFw 4 }
+acosFwServiceGroupS                 OBJECT IDENTIFIER ::= { acosFwServiceGroup 1 }
+
+fwServiceGroupSTable OBJECT-TYPE
+		SYNTAX SEQUENCE OF FwServiceGroupSEntry
+		MAX-ACCESS not-accessible
+		STATUS current
+		::={ acosFwServiceGroupS 1 } 
+
+
+	fwServiceGroupSEntry OBJECT-TYPE
+		SYNTAX FwServiceGroupSEntry
+		MAX-ACCESS not-accessible
+		STATUS current
+		INDEX {
+			fwServiceGroupName
+		}
+		::={ fwServiceGroupSTable 1 } 
+
+
+	FwServiceGroupSEntry ::=
+		SEQUENCE {
+			fwServiceGroupName DisplayString, 
+			fwServerSelectionFailDrop CounterBasedGauge64,
+			fwServerSelectionFailReset CounterBasedGauge64,
+			fwServicePeakConn CounterBasedGauge64
+		}
+
+			fwServiceGroupName OBJECT-TYPE
+			SYNTAX  DisplayString 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "FW Service Name" 
+			::={ fwServiceGroupSEntry 1 } 
+
+			fwServerSelectionFailDrop OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Service selection fail drop" 
+			::={ fwServiceGroupSEntry 2 } 
+
+			fwServerSelectionFailReset OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Service selection fail reset" 
+			::={ fwServiceGroupSEntry 3 } 
+
+			fwServicePeakConn OBJECT-TYPE
+			SYNTAX  CounterBasedGauge64 
+			MAX-ACCESS read-only 
+			STATUS current
+			DESCRIPTION  "Service peak connection" 
+			::={ fwServiceGroupSEntry 4 } 
+
+acosFwLogging                       OBJECT IDENTIFIER ::= { acosFw 6 }
+acosFwLoggingS                      OBJECT IDENTIFIER ::= { acosFwLogging 1 }
+
+		logMessageSent OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Log Packet Sent" 
+		::={ acosFwLoggingS 1 } 
+
+		logTypeReset OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Log Event Type Reset" 
+		::={ acosFwLoggingS 2 } 
+
+		logTypeDeny OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Log Event Type Deny" 
+		::={ acosFwLoggingS 3 } 
+
+		logTypeSessionClosed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Log Event Type Session Close" 
+		::={ acosFwLoggingS 4 } 
+
+		logTypeSessionOpened OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Log Event Type Session Open" 
+		::={ acosFwLoggingS 5 } 
+
+		ruleNotLogged OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Firewall Rule Not Logged" 
+		::={ acosFwLoggingS 6 } 
+
+		logDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Log Packets Dropped" 
+		::={ acosFwLoggingS 7 } 
+
+		tcpSessionCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP Session Created" 
+		::={ acosFwLoggingS 8 } 
+
+		tcpSessionDeleted OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP Session Deleted" 
+		::={ acosFwLoggingS 9 } 
+
+		udpSessionCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "UDP Session Created" 
+		::={ acosFwLoggingS 10 } 
+
+		udpSessionDeleted OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "UDP Session Deleted" 
+		::={ acosFwLoggingS 11 } 
+
+		icmpSessionDeleted OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "ICMP Session Deleted" 
+		::={ acosFwLoggingS 12 } 
+
+		icmpSessionCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "ICMP Session Created" 
+		::={ acosFwLoggingS 13 } 
+
+		icmpv6SessionDeleted OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "ICMPV6 Session Deleted" 
+		::={ acosFwLoggingS 14 } 
+
+		icmpv6SessionCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "ICMPV6 Session Created" 
+		::={ acosFwLoggingS 15 } 
+
+		otherSessionDeleted OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Other Session Deleted" 
+		::={ acosFwLoggingS 16 } 
+
+		otherSessionCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Other Session Created" 
+		::={ acosFwLoggingS 17 } 
+
+		httpRequestLogged OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HTTP Request Logged" 
+		::={ acosFwLoggingS 18 } 
+
+		httpLoggingInvalidFormat OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HTTP Logging Invalid Format Error" 
+		::={ acosFwLoggingS 19 } 
+
+		dcmsgPermit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Dcmsg Permit" 
+		::={ acosFwLoggingS 20 } 
+
+		algOverridePermit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Alg Override Permit" 
+		::={ acosFwLoggingS 21 } 
+
+		templateError OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Template Error" 
+		::={ acosFwLoggingS 22 } 
+
+		ipv4FragApplied OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "IPv4 Fragmentation Applied" 
+		::={ acosFwLoggingS 23 } 
+
+		ipv4FragFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "IPv4 Fragmentation Failed" 
+		::={ acosFwLoggingS 24 } 
+
+		ipv6FragApplied OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "IPv6 Fragmentation Applied" 
+		::={ acosFwLoggingS 25 } 
+
+		ipv6FragFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "IPv6 Fragmentation Failed" 
+		::={ acosFwLoggingS 26 } 
+
+		outOfBuffers OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Out of Buffers" 
+		::={ acosFwLoggingS 27 } 
+
+		addMsgFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Add Message to Buffer Failed" 
+		::={ acosFwLoggingS 28 } 
+
+		tcpLoggingConnEstablished OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP Logging Conn Established" 
+		::={ acosFwLoggingS 29 } 
+
+		tcpLoggingConnCreateFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP Logging Conn Create Failed" 
+		::={ acosFwLoggingS 30 } 
+
+		tcpLoggingConnDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP Logging Conn Dropped" 
+		::={ acosFwLoggingS 31 } 
+
+		logMessageTooLong OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Log message too long" 
+		::={ acosFwLoggingS 32 } 
+
+		httpOutOfOrderDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HTTP out-of-order dropped" 
+		::={ acosFwLoggingS 33 } 
+
+		httpAllocFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HTTP Request Info Allocation Failed" 
+		::={ acosFwLoggingS 34 } 
+
+		sctpSessionCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SCTP Session Created" 
+		::={ acosFwLoggingS 35 } 
+
+		sctpSessionDeleted OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SCTP Session Deleted" 
+		::={ acosFwLoggingS 36 } 
+
+		logTypeSctpInnerProtoFilter OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Log Event Type SCTP Inner Proto Filter" 
+		::={ acosFwLoggingS 37 } 
+
+		logTypeGtpMessageFiltering OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Log Event Type GTP Message Filtering" 
+		::={ acosFwLoggingS 38 } 
+
+		logTypeGtpApnFiltering OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Log Event Type GTP Apn Filtering" 
+		::={ acosFwLoggingS 39 } 
+
+		tcpLoggingPortAllocated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP Logging Port Allocated" 
+		::={ acosFwLoggingS 40 } 
+
+		tcpLoggingPortFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP Logging Port Freed" 
+		::={ acosFwLoggingS 41 } 
+
+		tcpLoggingPortAllocationFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP Logging Port Allocation Failed" 
+		::={ acosFwLoggingS 42 } 
+
+		logTypeGtpInvalidTeid OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Log Event Type GTP Invalid TEID" 
+		::={ acosFwLoggingS 43 } 
+
+		logGtpTypeReservedIePresent OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Log Event Type GTP Reserved Information Element Present" 
+		::={ acosFwLoggingS 44 } 
+
+		logTypeGtpMandatoryIeMissing OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Log Event Type GTP Mandatory Information Element Missing" 
+		::={ acosFwLoggingS 45 } 
+
+acosFwGlobal                        OBJECT IDENTIFIER ::= { acosFw 7 }
+acosFwGlobalS                       OBJECT IDENTIFIER ::= { acosFwGlobal 1 }
+
+		firewallGlobalTcpFullconeCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP Full-cone Created" 
+		::={ acosFwGlobalS 1 } 
+
+		firewallGlobalTcpFullconeFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TCP Full-cone Freed" 
+		::={ acosFwGlobalS 2 } 
+
+		firewallGlobalUdpFullconeCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "UDP Full-cone Created" 
+		::={ acosFwGlobalS 3 } 
+
+		firewallGlobalUdpFullconeFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "UDP Full-cone Freed" 
+		::={ acosFwGlobalS 4 } 
+
+		firewallGlobalFullconeCreationFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Full-Cone Creation Failure" 
+		::={ acosFwGlobalS 5 } 
+
+		firewallGlobalDataSessionCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data Session Created" 
+		::={ acosFwGlobalS 6 } 
+
+		firewallGlobalDataSessionFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data Session Freed" 
+		::={ acosFwGlobalS 7 } 
+
+		fullconeInDelQ OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Full-cone session found in delete queue" 
+		::={ acosFwGlobalS 8 } 
+
+		fullconeRetryLookup OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Full-cone session retry look-up" 
+		::={ acosFwGlobalS 9 } 
+
+		fullconeNotFound OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Full-cone session not found" 
+		::={ acosFwGlobalS 10 } 
+
+		fullconeOverflowEim OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Full-cone Session EIM Overflow" 
+		::={ acosFwGlobalS 11 } 
+
+		fullconeOverflowEif OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Full-cone Session EIF Overflow" 
+		::={ acosFwGlobalS 12 } 
+
+		udpFullconeCreatedShadow OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total UDP Full-cone sessions created" 
+		::={ acosFwGlobalS 13 } 
+
+		tcpFullconeCreatedShadow OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total TCP Full-cone sessions created" 
+		::={ acosFwGlobalS 14 } 
+
+		udpFullconeFreedShadow OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total UDP Full-cone sessions freed" 
+		::={ acosFwGlobalS 15 } 
+
+		tcpFullconeFreedShadow OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total TCP Full-cone sessions freed" 
+		::={ acosFwGlobalS 16 } 
+
+		fullconeCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Full-cone sessions created" 
+		::={ acosFwGlobalS 17 } 
+
+		fullconeFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Full-cone sessions freed" 
+		::={ acosFwGlobalS 18 } 
+
+		fullconeExtTooMany OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Fullcone Extension Too Many" 
+		::={ acosFwGlobalS 19 } 
+
+		fullconeExtMemAllocated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Fullcone Extension Memory Allocated" 
+		::={ acosFwGlobalS 20 } 
+
+		fullconeExtMemAllocFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Fullcone Extension Memory Allocate Failure" 
+		::={ acosFwGlobalS 21 } 
+
+		fullconeExtMemAllocInitFaulure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Fullcone Extension Initialization Failure" 
+		::={ acosFwGlobalS 22 } 
+
+		fullconeExtMemFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Fullcone Extension Memory Freed" 
+		::={ acosFwGlobalS 23 } 
+
+		fullconeExtAdded OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Fullcone Extension Added" 
+		::={ acosFwGlobalS 24 } 
+
+		haFullconeFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Full-cone Session Failure" 
+		::={ acosFwGlobalS 25 } 
+
+		dataSessionCreatedShadow OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Data Sessions Created" 
+		::={ acosFwGlobalS 26 } 
+
+		dataSessionFreedShadow OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Data Sessions Freed" 
+		::={ acosFwGlobalS 27 } 
+
+		firewallGlobalActiveFullconeSessions OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total Active Full-cone sessions" 
+		::={ acosFwGlobalS 28 } 
+
+		limitEntryFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Limit Entry Creation Failure" 
+		::={ acosFwGlobalS 29 } 
+
+		limitEntryAllocated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Limit Entry Allocated" 
+		::={ acosFwGlobalS 30 } 
+
+		limitEntryMemFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Limit Entry Freed" 
+		::={ acosFwGlobalS 31 } 
+
+		limitEntryCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Limit Entry Created" 
+		::={ acosFwGlobalS 32 } 
+
+		limitEntryNotInBucket OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Limit Entry Not in Bucket" 
+		::={ acosFwGlobalS 33 } 
+
+		limitEntryDeleted OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Limit Entry Marked Deleted" 
+		::={ acosFwGlobalS 34 } 
+
+		invalidLidDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Invalid Lid Drop" 
+		::={ acosFwGlobalS 35 } 
+
+		srcSessionLimitExceeded OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Source Prefix Session Limit Exceeded" 
+		::={ acosFwGlobalS 36 } 
+
+		limitExceeded OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Per Second Limit Exceeded" 
+		::={ acosFwGlobalS 37 } 
+
+		limitEntryPerCpuMemAllocated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Limit Entry Memory Allocated" 
+		::={ acosFwGlobalS 38 } 
+
+		limitEntryPerCpuMemAllocationFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Limit Entry Memory Allocation Failed" 
+		::={ acosFwGlobalS 39 } 
+
+		limitEntryPerCpuMemFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Limit Entry Memory Freed" 
+		::={ acosFwGlobalS 40 } 
+
+		algDefaultPortDisable OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Total ALG packets matching Default Port Disable" 
+		::={ acosFwGlobalS 41 } 
+
+		noFwdRoute OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "No Forward Route" 
+		::={ acosFwGlobalS 42 } 
+
+		noRevRoute OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "No Reverse Route" 
+		::={ acosFwGlobalS 43 } 
+
+		noFwdL2Dst OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "No Forward Mac Entry" 
+		::={ acosFwGlobalS 44 } 
+
+		noRevL2Dst OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "No Reverse Mac Entry" 
+		::={ acosFwGlobalS 45 } 
+
+		urpfPktDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "URPF check packet drop" 
+		::={ acosFwGlobalS 46 } 
+
+		fwdIngressPacketsTcp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Ingress Packets TCP" 
+		::={ acosFwGlobalS 47 } 
+
+		fwdEgressPacketsTcp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Egress Packets TCP" 
+		::={ acosFwGlobalS 48 } 
+
+		revIngressPacketsTcp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Ingress Packets TCP" 
+		::={ acosFwGlobalS 49 } 
+
+		revEgressPacketsTcp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Egress Packets TCP" 
+		::={ acosFwGlobalS 50 } 
+
+		fwdIngressBytesTcp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Ingress Bytes TCP" 
+		::={ acosFwGlobalS 51 } 
+
+		fwdEgressBytesTcp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Egress Bytes TCP" 
+		::={ acosFwGlobalS 52 } 
+
+		revIngressBytesTcp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Ingress Bytes TCP" 
+		::={ acosFwGlobalS 53 } 
+
+		revEgressBytesTcp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Egress Bytes TCP" 
+		::={ acosFwGlobalS 54 } 
+
+		fwdIngressPacketsUdp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Ingress Packets UDP" 
+		::={ acosFwGlobalS 55 } 
+
+		fwdEgressPacketsUdp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Egress Packets UDP" 
+		::={ acosFwGlobalS 56 } 
+
+		revIngressPacketsUdp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Ingress Packets UDP" 
+		::={ acosFwGlobalS 57 } 
+
+		revEgressPacketsUdp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Egress Packets UDP" 
+		::={ acosFwGlobalS 58 } 
+
+		fwdIngressBytesUdp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Ingress Bytes UDP" 
+		::={ acosFwGlobalS 59 } 
+
+		fwdEgressBytesUdp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Egress Bytes UDP" 
+		::={ acosFwGlobalS 60 } 
+
+		revIngressBytesUdp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Ingress Bytes UDP" 
+		::={ acosFwGlobalS 61 } 
+
+		revEgressBytesUdp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Egress Bytes UDP" 
+		::={ acosFwGlobalS 62 } 
+
+		fwdIngressPacketsIcmp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Ingress Packets ICMP" 
+		::={ acosFwGlobalS 63 } 
+
+		fwdEgressPacketsIcmp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Egress Packets ICMP" 
+		::={ acosFwGlobalS 64 } 
+
+		revIngressPacketsIcmp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Ingress Packets ICMP" 
+		::={ acosFwGlobalS 65 } 
+
+		revEgressPacketsIcmp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Egress Packets ICMP" 
+		::={ acosFwGlobalS 66 } 
+
+		fwdIngressBytesIcmp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Ingress Bytes ICMP" 
+		::={ acosFwGlobalS 67 } 
+
+		fwdEgressBytesIcmp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Egress Bytes ICMP" 
+		::={ acosFwGlobalS 68 } 
+
+		revIngressBytesIcmp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Ingress Bytes ICMP" 
+		::={ acosFwGlobalS 69 } 
+
+		revEgressBytesIcmp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Egress Bytes ICMP" 
+		::={ acosFwGlobalS 70 } 
+
+		fwdIngressPacketsOthers OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Ingress Packets OTHERS" 
+		::={ acosFwGlobalS 71 } 
+
+		fwdEgressPacketsOthers OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Egress Packets OTHERS" 
+		::={ acosFwGlobalS 72 } 
+
+		revIngressPacketsOthers OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Ingress Packets OTHERS" 
+		::={ acosFwGlobalS 73 } 
+
+		revEgressPacketsOthers OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Egress Packets OTHERS" 
+		::={ acosFwGlobalS 74 } 
+
+		fwdIngressBytesOthers OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Ingress Bytes OTHERS" 
+		::={ acosFwGlobalS 75 } 
+
+		fwdEgressBytesOthers OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Egress Bytes OTHERS" 
+		::={ acosFwGlobalS 76 } 
+
+		revIngressBytesOthers OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Ingress Bytes OTHERS" 
+		::={ acosFwGlobalS 77 } 
+
+		revEgressBytesOthers OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Egress Bytes OTHERS" 
+		::={ acosFwGlobalS 78 } 
+
+		fwdIngressPktSizeRange1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Ingress Packet size between 0 and 200" 
+		::={ acosFwGlobalS 79 } 
+
+		fwdIngressPktSizeRange2 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Ingress Packet size between 201 and 800" 
+		::={ acosFwGlobalS 80 } 
+
+		fwdIngressPktSizeRange3 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Ingress Packet size between 801 and 1550" 
+		::={ acosFwGlobalS 81 } 
+
+		fwdIngressPktSizeRange4 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Ingress Packet size between 1551 and 9000" 
+		::={ acosFwGlobalS 82 } 
+
+		fwdEgressPktSizeRange1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Egress Packet size between 0 and 200" 
+		::={ acosFwGlobalS 83 } 
+
+		fwdEgressPktSizeRange2 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Egress Packet size between 201 and 800" 
+		::={ acosFwGlobalS 84 } 
+
+		fwdEgressPktSizeRange3 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Egress Packet size between 801 and 1550" 
+		::={ acosFwGlobalS 85 } 
+
+		fwdEgressPktSizeRange4 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Forward Egress Packet size between 1551 and 9000" 
+		::={ acosFwGlobalS 86 } 
+
+		revIngressPktSizeRange1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Ingress Packet size between 0 and 200" 
+		::={ acosFwGlobalS 87 } 
+
+		revIngressPktSizeRange2 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Ingress Packet size between 201 and 800" 
+		::={ acosFwGlobalS 88 } 
+
+		revIngressPktSizeRange3 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Ingress Packet size between 801 and 1550" 
+		::={ acosFwGlobalS 89 } 
+
+		revIngressPktSizeRange4 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Ingress Packet size between 1551 and 9000" 
+		::={ acosFwGlobalS 90 } 
+
+		revEgressPktSizeRange1 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Egress Packet size between 0 and 200" 
+		::={ acosFwGlobalS 91 } 
+
+		revEgressPktSizeRange2 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Egress Packet size between 201 and 800" 
+		::={ acosFwGlobalS 92 } 
+
+		revEgressPktSizeRange3 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Egress Packet size between 801 and 1550" 
+		::={ acosFwGlobalS 93 } 
+
+		revEgressPktSizeRange4 OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Reverse Egress Packet size between 1551 and 9000" 
+		::={ acosFwGlobalS 94 } 
+
+acosFwAlg                           OBJECT IDENTIFIER ::= { acosFw 9 }
+acosFwAlgFtp                        OBJECT IDENTIFIER ::= { acosFwAlg 2 }
+acosFwAlgFtpS                       OBJECT IDENTIFIER ::= { acosFwAlgFtp 1 }
+
+		clientPortRequest OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "PORT Requests From Client" 
+		::={ acosFwAlgFtpS 1 } 
+
+		clientEprtRequest OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "EPRT Requests From Client" 
+		::={ acosFwAlgFtpS 2 } 
+
+		serverPasvReply OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "PASV Replies From Server" 
+		::={ acosFwAlgFtpS 3 } 
+
+		serverEpsvReply OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "EPSV Replies From Server" 
+		::={ acosFwAlgFtpS 4 } 
+
+		portRetransmits OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "PORT Retransmits" 
+		::={ acosFwAlgFtpS 5 } 
+
+		pasvRetransmits OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "PASV Retransmits" 
+		::={ acosFwAlgFtpS 6 } 
+
+		ftpSmpAppTypeMismatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SMP App Type Mismatch" 
+		::={ acosFwAlgFtpS 7 } 
+
+		retransmitSanityCheckFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Retransmit Sanity Check Failure" 
+		::={ acosFwAlgFtpS 8 } 
+
+		smpConnAllocFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SMP Helper Conn Alloc Failure" 
+		::={ acosFwAlgFtpS 9 } 
+
+		portHelperCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "PORT Helper Created" 
+		::={ acosFwAlgFtpS 10 } 
+
+		pasvHelperCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "PASV Helper Created" 
+		::={ acosFwAlgFtpS 11 } 
+
+		portHelperAcquireInDelQ OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "PORT Helper Acquire In Del Queue" 
+		::={ acosFwAlgFtpS 12 } 
+
+		portHelperAcquireAlreadyUsed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "PORT Helper Acquire Already Used" 
+		::={ acosFwAlgFtpS 13 } 
+
+		pasvHelperAcquireInDelQ OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "PASV Helper Acquire In Del Queue" 
+		::={ acosFwAlgFtpS 14 } 
+
+		pasvHelperAcquireAlreadyUsed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "PASV Helper Acquire Already Used" 
+		::={ acosFwAlgFtpS 15 } 
+
+		portHelperFreedUsed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "PORT Helper Freed Used" 
+		::={ acosFwAlgFtpS 16 } 
+
+		portHelperFreedUnused OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "PORT Helper Freed Unused" 
+		::={ acosFwAlgFtpS 17 } 
+
+		pasvHelperFreedUsed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "PASV Helper Freed Used" 
+		::={ acosFwAlgFtpS 18 } 
+
+		pasvHelperFreedUnused OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "PASV Helper Freed Unused" 
+		::={ acosFwAlgFtpS 19 } 
+
+acosFwAlgTftp                       OBJECT IDENTIFIER ::= { acosFwAlg 3 }
+acosFwAlgTftpS                      OBJECT IDENTIFIER ::= { acosFwAlgTftp 1 }
+
+		sessionCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TFTP Client Sessions Created" 
+		::={ acosFwAlgTftpS 1 } 
+
+		helperCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TFTP Helper Sessions created" 
+		::={ acosFwAlgTftpS 2 } 
+
+		helperFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TFTP Helper Sessions freed" 
+		::={ acosFwAlgTftpS 3 } 
+
+		helperFreedUsed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TFTP Helper Sessions freed used" 
+		::={ acosFwAlgTftpS 4 } 
+
+		helperFreedUnused OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TFTP Helper Sessions freed unused" 
+		::={ acosFwAlgTftpS 5 } 
+
+		helperAlreadyUsed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TFTP Helper Session already used" 
+		::={ acosFwAlgTftpS 6 } 
+
+		helperInRml OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "TFTP Helper Session in Remove List" 
+		::={ acosFwAlgTftpS 7 } 
+
+acosFwAlgRtsp                       OBJECT IDENTIFIER ::= { acosFwAlg 4 }
+acosFwAlgRtspS                      OBJECT IDENTIFIER ::= { acosFwAlgRtsp 1 }
+
+		transportInserted OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Created" 
+		::={ acosFwAlgRtspS 1 } 
+
+		transportFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Freed" 
+		::={ acosFwAlgRtspS 2 } 
+
+		transportAllocFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Alloc Failure" 
+		::={ acosFwAlgRtspS 3 } 
+
+		cgnv6StatefullFireWallAlgRtspDataSessionCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data Session Created" 
+		::={ acosFwAlgRtspS 4 } 
+
+		cgnv6StatefullFireWallAlgRtspDataSessionFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data Session Freed" 
+		::={ acosFwAlgRtspS 5 } 
+
+		extCreationFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Extension Creation Failure" 
+		::={ acosFwAlgRtspS 6 } 
+
+		transportAddToExt OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Added to Extension" 
+		::={ acosFwAlgRtspS 7 } 
+
+		transportRemovedFromExt OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Removed from Extension" 
+		::={ acosFwAlgRtspS 8 } 
+
+		transportTooMany OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Too Many Transports for Control Conn" 
+		::={ acosFwAlgRtspS 9 } 
+
+		transportAlreadyInExt OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Already in Extension" 
+		::={ acosFwAlgRtspS 10 } 
+
+		transportExists OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Already Exists" 
+		::={ acosFwAlgRtspS 11 } 
+
+		transportLinkExtFailureControl OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Link to Extension Failure Control" 
+		::={ acosFwAlgRtspS 12 } 
+
+		transportLinkExtData OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Link to Extension Data" 
+		::={ acosFwAlgRtspS 13 } 
+
+		transportLinkExtFailureData OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Link to Extension Failure Data" 
+		::={ acosFwAlgRtspS 14 } 
+
+		transportInsertedShadow OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Inserted Shadow" 
+		::={ acosFwAlgRtspS 15 } 
+
+		transportCreationRace OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Create Race" 
+		::={ acosFwAlgRtspS 16 } 
+
+		transportAllocFailureShadow OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Alloc Failure Shadow" 
+		::={ acosFwAlgRtspS 17 } 
+
+		transportPutInDelQ OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Put in Delete Queue" 
+		::={ acosFwAlgRtspS 18 } 
+
+		transportFreedShadow OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Freed Shadow" 
+		::={ acosFwAlgRtspS 19 } 
+
+		transportAcquiredFromControl OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Acquired Control" 
+		::={ acosFwAlgRtspS 20 } 
+
+		transportFoundFromPrevControl OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Found From Prev Control" 
+		::={ acosFwAlgRtspS 21 } 
+
+		transportAcquireFailureFromControl OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Acquire Failure Control" 
+		::={ acosFwAlgRtspS 22 } 
+
+		transportReleasedFromControl OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Released Control" 
+		::={ acosFwAlgRtspS 23 } 
+
+		transportDoubleReleaseFromControl OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Double Release Control" 
+		::={ acosFwAlgRtspS 24 } 
+
+		transportAcquiredFromData OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Acquired Data" 
+		::={ acosFwAlgRtspS 25 } 
+
+		transportAcquireFailureFromData OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Acquire Failure Data" 
+		::={ acosFwAlgRtspS 26 } 
+
+		transportReleasedFromData OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Released Data" 
+		::={ acosFwAlgRtspS 27 } 
+
+		transportDoubleReleaseFromData OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Double Release Data" 
+		::={ acosFwAlgRtspS 28 } 
+
+		transportRetryLookupOnDataFree OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Retry Lookup Data" 
+		::={ acosFwAlgRtspS 29 } 
+
+		transportNotFoundOnDataFree OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Transport Not Found Data" 
+		::={ acosFwAlgRtspS 30 } 
+
+		rstpDataSessionCreatedShadow OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data Session Created Shadow" 
+		::={ acosFwAlgRtspS 31 } 
+
+		rstpDataSessionFreedShadow OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Data Session Freed Shadow" 
+		::={ acosFwAlgRtspS 32 } 
+
+		haControlExtCreationFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Control Extension Creation Failure" 
+		::={ acosFwAlgRtspS 33 } 
+
+		haControlSessionCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Control Session Created" 
+		::={ acosFwAlgRtspS 34 } 
+
+		haDataSessionCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Data Session Created" 
+		::={ acosFwAlgRtspS 35 } 
+
+acosFwAlgPptp                       OBJECT IDENTIFIER ::= { acosFwAlg 5 }
+acosFwAlgPptpS                      OBJECT IDENTIFIER ::= { acosFwAlgPptp 1 }
+
+		callsEstablished OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Calls Established" 
+		::={ acosFwAlgPptpS 1 } 
+
+		callReqPnsCallIdMismatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Call ID Mismatch on Call Request" 
+		::={ acosFwAlgPptpS 2 } 
+
+		callReplyPnsCallIdMismatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Call ID Mismatch on Call Reply" 
+		::={ acosFwAlgPptpS 3 } 
+
+		greSessionCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GRE Session Created" 
+		::={ acosFwAlgPptpS 4 } 
+
+		greSessionFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GRE Session Freed" 
+		::={ acosFwAlgPptpS 5 } 
+
+		callReqRetransmit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Call Request Retransmit" 
+		::={ acosFwAlgPptpS 6 } 
+
+		callReqNew OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Call Request New" 
+		::={ acosFwAlgPptpS 7 } 
+
+		callReqExtAllocFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Call Request Ext Alloc Failure" 
+		::={ acosFwAlgPptpS 8 } 
+
+		callReplyCallIdUnknown OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Call Reply Unknown Client Call ID" 
+		::={ acosFwAlgPptpS 9 } 
+
+		callReplyRetransmit OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Call Reply Retransmit" 
+		::={ acosFwAlgPptpS 10 } 
+
+		callReplyExtExtAllocFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Call Request Ext Alloc Failure" 
+		::={ acosFwAlgPptpS 11 } 
+
+		smpAppTypeMismatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SMP App Type Mismatch" 
+		::={ acosFwAlgPptpS 12 } 
+
+		smpClientCallIdMismatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SMP Client Call ID Mismatch" 
+		::={ acosFwAlgPptpS 13 } 
+
+		smpSessionsCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SMP Session Created" 
+		::={ acosFwAlgPptpS 14 } 
+
+		smpSessionsFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SMP Session Freed" 
+		::={ acosFwAlgPptpS 15 } 
+
+		smpAllocFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SMP Session Alloc Failure" 
+		::={ acosFwAlgPptpS 16 } 
+
+		greConnCreationFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GRE Conn Alloc Failure" 
+		::={ acosFwAlgPptpS 17 } 
+
+		greConnExtCreationFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GRE Conn Ext Alloc Failure" 
+		::={ acosFwAlgPptpS 18 } 
+
+		greNoFwdRoute OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GRE No Fwd Route" 
+		::={ acosFwAlgPptpS 19 } 
+
+		greNoRevRoute OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GRE No Rev Route" 
+		::={ acosFwAlgPptpS 20 } 
+
+		greNoControlConn OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GRE No Control Conn" 
+		::={ acosFwAlgPptpS 21 } 
+
+		greConnAlreadyExists OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GRE Conn Already Exists" 
+		::={ acosFwAlgPptpS 22 } 
+
+		greFreeNoExt OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GRE Free No Ext" 
+		::={ acosFwAlgPptpS 23 } 
+
+		greFreeNoSmp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GRE Free No SMP" 
+		::={ acosFwAlgPptpS 24 } 
+
+		greFreeSmpAppTypeMismatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "GRE Free SMP App Type Mismatch" 
+		::={ acosFwAlgPptpS 25 } 
+
+		controlFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control Session Freed" 
+		::={ acosFwAlgPptpS 26 } 
+
+		controlFreeNoExt OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control Free No Ext" 
+		::={ acosFwAlgPptpS 27 } 
+
+		controlFreeNoSmp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control Free No SMP" 
+		::={ acosFwAlgPptpS 28 } 
+
+		controlFreeSmpAppTypeMismatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Control Free SMP App Type Mismatch" 
+		::={ acosFwAlgPptpS 29 } 
+
+acosFwAlgSip                        OBJECT IDENTIFIER ::= { acosFwAlg 6 }
+acosFwAlgSipS                       OBJECT IDENTIFIER ::= { acosFwAlgSip 1 }
+
+		statRequest OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Request Received" 
+		::={ acosFwAlgSipS 1 } 
+
+		statResponse OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Response Received" 
+		::={ acosFwAlgSipS 2 } 
+
+		methodRegister OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Method REGISTER" 
+		::={ acosFwAlgSipS 3 } 
+
+		methodInvite OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Method INVITE" 
+		::={ acosFwAlgSipS 4 } 
+
+		methodAck OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Method ACK" 
+		::={ acosFwAlgSipS 5 } 
+
+		methodCancel OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Method CANCEL" 
+		::={ acosFwAlgSipS 6 } 
+
+		methodBye OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Method BYE" 
+		::={ acosFwAlgSipS 7 } 
+
+		methodOptions OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Method OPTIONS" 
+		::={ acosFwAlgSipS 8 } 
+
+		methodPrack OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Method PRACK" 
+		::={ acosFwAlgSipS 9 } 
+
+		methodSubscribe OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Method SUBSCRIBE" 
+		::={ acosFwAlgSipS 10 } 
+
+		methodNotify OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Method NOTIFY" 
+		::={ acosFwAlgSipS 11 } 
+
+		methodPublish OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Method PUBLISH" 
+		::={ acosFwAlgSipS 12 } 
+
+		methodInfo OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Method INFO" 
+		::={ acosFwAlgSipS 13 } 
+
+		methodRefer OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Method REFER" 
+		::={ acosFwAlgSipS 14 } 
+
+		methodMessage OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Method MESSAGE" 
+		::={ acosFwAlgSipS 15 } 
+
+		methodUpdate OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Method UPDATE" 
+		::={ acosFwAlgSipS 16 } 
+
+		methodUnknown OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Method Unknown" 
+		::={ acosFwAlgSipS 17 } 
+
+		parseError OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Message Parse Error" 
+		::={ acosFwAlgSipS 18 } 
+
+		keepAlive OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Keep Alive" 
+		::={ acosFwAlgSipS 19 } 
+
+		contactError OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Contact Process Error" 
+		::={ acosFwAlgSipS 20 } 
+
+		sdpError OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SDP Process Error" 
+		::={ acosFwAlgSipS 21 } 
+
+		rtpPortNoOp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RTP Port No Op" 
+		::={ acosFwAlgSipS 22 } 
+
+		rtpRtcpPortSuccess OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RTP RTCP Port Success" 
+		::={ acosFwAlgSipS 23 } 
+
+		rtpPortFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RTP Port Failure" 
+		::={ acosFwAlgSipS 24 } 
+
+		rtcpPortFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RTCP Port Failure" 
+		::={ acosFwAlgSipS 25 } 
+
+		contactPortNoOp OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Contact Port No Op" 
+		::={ acosFwAlgSipS 26 } 
+
+		contactPortSuccess OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Contact Port Success" 
+		::={ acosFwAlgSipS 27 } 
+
+		contactPortFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Contact Port Failure" 
+		::={ acosFwAlgSipS 28 } 
+
+		contactNew OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Contact Alloc" 
+		::={ acosFwAlgSipS 29 } 
+
+		contactAllocFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Contact Alloc Failure" 
+		::={ acosFwAlgSipS 30 } 
+
+		contactEim OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Contact EIM" 
+		::={ acosFwAlgSipS 31 } 
+
+		contactEimSet OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Contact EIM Set" 
+		::={ acosFwAlgSipS 32 } 
+
+		rtpNew OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RTP Alloc" 
+		::={ acosFwAlgSipS 33 } 
+
+		rtpAllocFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RTP Alloc Failure" 
+		::={ acosFwAlgSipS 34 } 
+
+		rtpEim OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RTP EIM" 
+		::={ acosFwAlgSipS 35 } 
+
+		helperFound OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SMP Helper Conn Found" 
+		::={ acosFwAlgSipS 36 } 
+
+		sipHelperCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SMP Helper Conn Created" 
+		::={ acosFwAlgSipS 37 } 
+
+		sipHelperDeleted OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SMP Helper Conn Already Deleted" 
+		::={ acosFwAlgSipS 38 } 
+
+		sipHelperFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SMP Helper Conn Freed" 
+		::={ acosFwAlgSipS 39 } 
+
+		helperFailure OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "SMP Helper Failure" 
+		::={ acosFwAlgSipS 40 } 
+
+acosFwTcpWindowCheck                OBJECT IDENTIFIER ::= { acosFw 12 }
+acosFwTcpWindowCheckS               OBJECT IDENTIFIER ::= { acosFwTcpWindowCheck 1 }
+
+		outsideWindow OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "packet dropped counter for outside of tcp window" 
+		::={ acosFwTcpWindowCheckS 1 } 
+
+acosFwRadius                        OBJECT IDENTIFIER ::= { acosFw 17 }
+acosFwRadiusServer                  OBJECT IDENTIFIER ::= { acosFwRadius 1 }
+acosFwRadiusServerS                 OBJECT IDENTIFIER ::= { acosFwRadiusServer 1 }
+
+		msisdnReceived OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "MSISDN Received" 
+		::={ acosFwRadiusServerS 1 } 
+
+		imeiReceived OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "IMEI Received" 
+		::={ acosFwRadiusServerS 2 } 
+
+		imsiReceived OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "IMSI Received" 
+		::={ acosFwRadiusServerS 3 } 
+
+		customReceived OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Custom attribute Received" 
+		::={ acosFwRadiusServerS 4 } 
+
+		radiusRequestReceived OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Request Received" 
+		::={ acosFwRadiusServerS 5 } 
+
+		radiusRequestDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Request Dropped (Malformed Packet)" 
+		::={ acosFwRadiusServerS 6 } 
+
+		requestBadSecretDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Request Bad Secret Dropped" 
+		::={ acosFwRadiusServerS 7 } 
+
+		requestNoKeyVapDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Request No Key Attribute Dropped" 
+		::={ acosFwRadiusServerS 8 } 
+
+		requestMalformedDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Request Malformed Dropped" 
+		::={ acosFwRadiusServerS 9 } 
+
+		requestIgnored OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Request Table Full Dropped" 
+		::={ acosFwRadiusServerS 10 } 
+
+		radiusTableFull OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Request Dropped (Table Full)" 
+		::={ acosFwRadiusServerS 11 } 
+
+		secretNotConfiguredDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Secret Not Configured Dropped" 
+		::={ acosFwRadiusServerS 12 } 
+
+		haStandbyDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Standby Dropped" 
+		::={ acosFwRadiusServerS 13 } 
+
+		ipv6PrefixLengthMismatch OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Framed IPV6 Prefix Length Mismatch" 
+		::={ acosFwRadiusServerS 14 } 
+
+		invalidKey OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Radius Request has Invalid Key Field" 
+		::={ acosFwRadiusServerS 15 } 
+
+		smpMemAllocated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS SMP Memory Allocated" 
+		::={ acosFwRadiusServerS 21 } 
+
+		smpMemAllocFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS SMP Memory Allocation Failed" 
+		::={ acosFwRadiusServerS 22 } 
+
+		smpMemFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS SMP Memory Freed" 
+		::={ acosFwRadiusServerS 23 } 
+
+		smpCreated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS SMP Created" 
+		::={ acosFwRadiusServerS 24 } 
+
+		smpInRml OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS SMP in RML" 
+		::={ acosFwRadiusServerS 25 } 
+
+		smpDeleted OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS SMP Deleted" 
+		::={ acosFwRadiusServerS 26 } 
+
+		memAllocated OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Memory Allocated" 
+		::={ acosFwRadiusServerS 27 } 
+
+		memAllocFailed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Memory Allocation Failed" 
+		::={ acosFwRadiusServerS 28 } 
+
+		memFreed OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Memory Freed" 
+		::={ acosFwRadiusServerS 29 } 
+
+		haSyncCreateSent OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Record Sync Create Sent" 
+		::={ acosFwRadiusServerS 30 } 
+
+		haSyncDeleteSent OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Record Sync Delete Sent" 
+		::={ acosFwRadiusServerS 31 } 
+
+		haSyncCreateRecv OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Record Sync Create Received" 
+		::={ acosFwRadiusServerS 32 } 
+
+		haSyncDeleteRecv OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Record Sync Delete Received" 
+		::={ acosFwRadiusServerS 33 } 
+
+		acctOnFiltersFull OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS Acct On Request Ignored(Filters Full)" 
+		::={ acosFwRadiusServerS 34 } 
+
+		acctOnDupRequest OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Duplicate RADIUS Acct On Request" 
+		::={ acosFwRadiusServerS 35 } 
+
+		ipMismatchDelete OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Radius Entry IP Mismatch Delete" 
+		::={ acosFwRadiusServerS 36 } 
+
+		ipAddRaceDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Radius Entry IP Add Race Drop" 
+		::={ acosFwRadiusServerS 37 } 
+
+		haSyncNoKeyVapDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "HA Record Sync No key dropped" 
+		::={ acosFwRadiusServerS 38 } 
+
+		interCardMsgFailDrop OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "Inter-Card Message Fail Drop" 
+		::={ acosFwRadiusServerS 39 } 
+
+		radiusPacketsRedirected OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS packets redirected (SO)" 
+		::={ acosFwRadiusServerS 40 } 
+
+		radiusPacketsRedirectFailDropped OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS packets dropped due to redirect failure (SO)" 
+		::={ acosFwRadiusServerS 41 } 
+
+		radiusPacketsProcessLocal OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS packets processed locally without redirection (SO)" 
+		::={ acosFwRadiusServerS 42 } 
+
+		radiusPacketsDroppedNotLo OBJECT-TYPE
+		SYNTAX  CounterBasedGauge64 
+		MAX-ACCESS read-only 
+		STATUS current
+		DESCRIPTION  "RADIUS packets dropped dest not loopback (SO)" 
+		::={ acosFwRadiusServerS 43 } 
+
+END
+
